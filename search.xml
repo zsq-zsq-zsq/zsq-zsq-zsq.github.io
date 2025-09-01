@@ -1,150 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>spring</title>
-    <url>/2025/09/01/spring/</url>
-    <content><![CDATA[<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想:"></a>核心思想:</h3><p>spring的核心:</p>
-<p>IOC和AOP</p>
-<p>用到了哪些设计模式:</p>
-<p>bean的创建:</p>
-<p>单例模式</p>
-<p>工厂模式</p>
-<h3 id="ioc"><a href="#ioc" class="headerlink" title="ioc:"></a>ioc:</h3><p>对ioc的理解?</p>
-<p>用ioc容器来控制对象,控制就是对象的创建，初始化，销毁。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754119254731-abc8c988-7db1-4a3f-aa34-8a9a3b105051.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/webp/46195092/1754119259936-3edbd856-2801-466f-a88a-e06a9ef07799.webp" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/webp/46195092/1754119265399-a0275c0c-a0ff-416b-94aa-53005a6f22cc.webp" alt="img"></p>
-<p>ioc如何实现的?</p>
-<p>依赖注入和容器实现</p>
-<p>依赖倒置，依赖注入，控制反转分别是什么?</p>
-<p>如何实现依赖注入:</p>
-<p>spring容器里存储的是什么?</p>
-<p>Bean对象</p>
-<p>Bean是单例的吗?</p>
-<p>默认是单例，也可以通过修改作用域使Bean在每次请求都会创建一个实例。</p>
-<p>单例Bean要考虑线程安全问题。</p>
-<p>Bean的作用域:</p>
-<p>可以通过scope注解自定义实现，默认都是单例，还有像prototype这样的。</p>
-<p>Bean的生命周期，单例和非单例的生命周期是否相同?</p>
-<p>1：<img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754130837235-5a59ff21-55de-43a4-be87-6a1cfd447e8b.png" alt="img"></p>
-<p>2：<img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754121471754-15067de5-5954-4e2c-a54d-70f4a1b1ede5.png" alt="img"></p>
-<p>spring如何解决循环依赖?三级缓存结构是什么?为什么用三级缓存解决循环依赖问题?用二级缓存不行吗?</p>
-<p>1:三级缓存</p>
-<p>一级是已经完成实例化的</p>
-<p>二级是正在进行属性注入但是发现有循环依赖的</p>
-<p>三级是未经加工的工厂，里面创建了原始类，可以通过这个工厂的getObject来获取这个类，如果这个类被代理就会创建代理对象</p>
-<p>2:<img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754131255578-695412e6-d468-4258-b38b-ada5f358d771.png" alt="img"></p>
-<p>3:<img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754131279968-e0d6e5f8-7ff6-4ade-ae7c-e069c696d819.png" alt="img"></p>
-<p>三级缓存:</p>
-<p><strong>注入形态的问题:</strong></p>
-<p><strong>代理的“创建权”仍然掌握在 BeanPostProcessor 手里；</strong><br><strong>三级缓存只是提前“借调”了一次同样的钩子，保证循环依赖时注入的引用就是最终形态，且不会重复生成代理。</strong></p>
-<p><strong>破坏单例的问题:</strong></p>
-<p><strong>始终只暴露同一个最终对象（或代理外壳）</strong>，而 <strong>不会把“半成品”直接当作独立 Bean 发布出去</strong>。</p>
-<p>4:</p>
-<p>没有aop的情况下可以</p>
-<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP:"></a>AOP:</h3><p>AOP的概念:</p>
-<p>面向切面编程,能够将与业务无关，却为业务模块所共同调用的逻辑封装起来</p>
-<p>大大降低了代码的重复率，降低模块之间的耦合度。</p>
-<p>AOP通过什么机制实现的?</p>
-<p>动态代理</p>
-<h3 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理:"></a>事务管理:</h3><p>概念:</p>
-<p>spring提供了一致的事务管理接口，支持声明式和编程式事务。</p>
-<p>什么时候会失效?</p>
-<h3 id="springmvc"><a href="#springmvc" class="headerlink" title="springmvc:"></a>springmvc:</h3><p>处理流程:</p>
-<p>1:用户发起的 HTTP 请求，首先会被 DispatcherServlet 捕获</p>
-<p>2:会根据 URL、请求方法等信息，交给 HandlerMapping 进行路由匹配，查找对应的处理器，也就是 Controller 中的具体方法。</p>
-<p>3:找到对应 Controller 方法后，DispatcherServlet 会委托给处理器适配器 HandlerAdapter 进行调用。</p>
-<p>4:Controller 方法最终会返回结果，比如视图名称、ModelAndView 或直接返回 JSON 数据。</p>
-<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot:"></a>springboot:</h3><p>springboot比spring好在哪?</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756385638220-14efc89f-f5c6-4cc5-a4d8-1695c772a578.png" alt="img"></p>
-<p>自动配置和自动装配:</p>
-<p>自动配置:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756389568374-84f6afab-65e2-4007-9812-0b561d2d92d8.png" alt="img"></p>
-<p>自动装配是实现自动配置的方法</p>
-<p>约定优于配置:</p>
-<p><strong>Spring Boot 先帮 80 % 的场景定好“潜规则”，你按规则放东西就行；只有剩下 20 % 的个性化需求才需要你去改 yml 或写配置。</strong></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>建站过程</title>
-    <url>/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
-<p><a href="https://liangshenglei.github.io/2023/03/06/Butterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/index.html">Butterfly主题的详细配置 | 梁圣磊の博客</a></p>
-<p>域名配置加一条解析在根目录加个文件就可以了s</p>
-]]></content>
-      <categories>
-        <category>建站</category>
-      </categories>
-      <tags>
-        <tag>建站</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网络io</title>
-    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>计算机基础</category>
-      </categories>
-      <tags>
-        <tag>io</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>redis</title>
-    <url>/2025/08/31/redis/</url>
-    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
-<p>String:适用分布式锁，共享信息等</p>
-<p>Hash:适用购物车场景</p>
-<p>List:适用消息队列</p>
-<p>Set:适用点赞场景</p>
-<p>Zset:适用与排序场景</p>
-<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
-<p>1:redis大部分操作都是在内存中进行的</p>
-<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
-<p>3:采用了io多路复用机制处理大量的客户端请求</p>
-<p>redis哪里使用了多线程:</p>
-<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
-<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
-<p>lua脚本</p>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
-<p>AOF日志+RDB快照</p>
-<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
-<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
-<p>过期删除:</p>
-<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
-<p>内存淘汰:</p>
-<p>不进行:不再进行服务</p>
-<p>进行:优先淘汰快过期的和最近最少访问的</p>
-<p>缓存雪崩，击穿，穿透:</p>
-<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
-<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
-<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
-<p>缓存一致性:</p>
-<p>写策略:</p>
-<p>1:更新数据库的数据</p>
-<p>2:删掉缓存</p>
-<p>读策略:</p>
-<p>1:缓存未命中</p>
-<p>2:从数据库中读数据</p>
-<p>3:把数据写到缓存里</p>
-]]></content>
-      <categories>
-        <category>redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql</title>
     <url>/2025/08/31/mysql/</url>
     <content><![CDATA[<h3 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础:"></a>SQL基础:</h3><p>联表查询:</p>
@@ -260,6 +116,164 @@
       </categories>
       <tags>
         <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>spring</title>
+    <url>/2025/09/01/spring/</url>
+    <content><![CDATA[<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想:"></a>核心思想:</h3><p>spring的核心:</p>
+<p>IOC和AOP</p>
+<p>用到了哪些设计模式:</p>
+<p>bean的创建:</p>
+<p>单例模式</p>
+<p>工厂模式</p>
+<h3 id="ioc"><a href="#ioc" class="headerlink" title="ioc:"></a>ioc:</h3><p>对ioc的理解?</p>
+<p>用ioc容器来控制对象,控制就是对象的创建，初始化，销毁。解决了繁琐的对象生命周期操作。</p>
+<p>ioc如何实现的?</p>
+<p>依赖注入和容器实现</p>
+<p>依赖注入，控制反转分别是什么?</p>
+<p>控制反转:流程的控制权从程序员变成了框架</p>
+<p>依赖注入:将依赖的类对象通过在外部创建好通过构造函数，函数参数等方式给类使用</p>
+<p>如何实现依赖注入:</p>
+<p>构造器注入</p>
+<p>Setter方法注入</p>
+<p>字段注入</p>
+<p>spring容器里存储的是什么?</p>
+<p>Bean对象</p>
+<p>Bean是单例的吗?</p>
+<p>默认是单例，也可以通过修改作用域使Bean在每次请求都会创建一个实例。</p>
+<p>单例Bean要考虑线程安全问题。</p>
+<p>Bean的作用域:</p>
+<p>可以通过scope注解自定义实现，默认都是单例，还有像prototype这样的。</p>
+<p>Bean的生命周期</p>
+<p>生命周期:</p>
+<p>1:实例化</p>
+<p>2:属性赋值</p>
+<p>3:初始化方法:</p>
+<p>初始化的前置方法</p>
+<p>初始化方法</p>
+<p>初始化的后置方法</p>
+<p>4:使用</p>
+<p>5:销毁</p>
+<p>spring如何解决循环依赖?三级缓存结构是什么?为什么用三级缓存解决循环依赖问题?</p>
+<p>1:</p>
+<p>三级缓存</p>
+<p>2:</p>
+<p>一级是已经完成实例化的</p>
+<p>二级是正在进行属性注入但是发现有循环依赖的</p>
+<p>三级是未经加工的工厂，里面创建了原始类，可以通过这个工厂的getObject来获取这个类，如果这个类被代理就会创建代理对象</p>
+<p>3:</p>
+<p>为了正确处理AOP代理的Bean。<br><strong>三级缓存只是提前“借调”了一次同样的钩子，保证循环依赖时注入的引用就是最终形态，且不会重复生成代理。</strong></p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP:"></a>AOP:</h3><p>AOP的概念:</p>
+<p>面向切面编程,能够将与业务无关，却为业务模块所共同调用的逻辑封装起来</p>
+<p>大大降低了代码的重复率，降低模块之间的耦合度。</p>
+<p>AOP通过什么机制实现的?</p>
+<p>动态代理</p>
+<h3 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理:"></a>事务管理:</h3><p>概念:</p>
+<p>spring提供了一致的事务管理接口，支持声明式和编程式事务。</p>
+<p>什么时候会失效?</p>
+<p>第一种，<code>@Transactional</code> 注解用在非 public 修饰的方法上。</p>
+<p>因为:Spring 的 AOP 代理机制决定了它无法代理 private 方法。</p>
+<p>第二种，方法内部调用。</p>
+<p>原因:使用的是 this 引用，直接访问原始对象的方法，绕过了 Spring 的代理对象，也就导致代理对象中的事务逻辑没有机会执行。</p>
+<p>第三种，如果在事务方法内部用 try-catch 捕获了异常，但没有在 catch 块中将异常重新抛出，或者抛出一个新的能触发回滚的异常。</p>
+<p>原因:那么 Spring 的事务拦截器就无法感知到异常的发生，也就没办法回滚。</p>
+<p>第四种，Spring 事务默认只对 RuntimeException 和 Error 类型的异常进行回滚。</p>
+<h3 id="springmvc"><a href="#springmvc" class="headerlink" title="springmvc:"></a>springmvc:</h3><p>处理流程:</p>
+<p>1:用户发起的 HTTP 请求，首先会被 DispatcherServlet 捕获</p>
+<p>2:会根据 URL、请求方法等信息，交给 HandlerMapping 进行路由匹配，查找对应的处理器，也就是 Controller 中的具体方法。</p>
+<p>3:找到对应 Controller 方法后，DispatcherServlet 会委托给处理器适配器 HandlerAdapter 进行调用。</p>
+<p>4:Controller 方法最终会返回结果，比如视图名称、ModelAndView 或直接返回 JSON 数据。</p>
+<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot:"></a>springboot:</h3><p>springboot比spring好在哪?</p>
+<p>提供了自动配置</p>
+<p>内嵌多种服务器</p>
+<p>自动配置和自动装配:</p>
+<p>自动配置:</p>
+<p>classpath中有springboot-starter-*就默认注册所需的全套Bean</p>
+<p>一些相关配置只需要在yml中改改就可以了</p>
+<p>自动装配:</p>
+<p>是实现自动配置的方法</p>
+<p>约定优于配置:</p>
+<p><strong>Spring Boot 先帮 80 % 的场景定好“潜规则”，你按规则放东西就行；只有剩下 20 % 的个性化需求才需要你去改 yml 或写配置。</strong></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络io</title>
+    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+      <tags>
+        <tag>io</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>redis</title>
+    <url>/2025/08/31/redis/</url>
+    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
+<p>String:适用分布式锁，共享信息等</p>
+<p>Hash:适用购物车场景</p>
+<p>List:适用消息队列</p>
+<p>Set:适用点赞场景</p>
+<p>Zset:适用与排序场景</p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
+<p>1:redis大部分操作都是在内存中进行的</p>
+<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
+<p>3:采用了io多路复用机制处理大量的客户端请求</p>
+<p>redis哪里使用了多线程:</p>
+<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
+<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
+<p>lua脚本</p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
+<p>AOF日志+RDB快照</p>
+<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
+<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
+<p>过期删除:</p>
+<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
+<p>内存淘汰:</p>
+<p>不进行:不再进行服务</p>
+<p>进行:优先淘汰快过期的和最近最少访问的</p>
+<p>缓存雪崩，击穿，穿透:</p>
+<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
+<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
+<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
+<p>缓存一致性:</p>
+<p>写策略:</p>
+<p>1:更新数据库的数据</p>
+<p>2:删掉缓存</p>
+<p>读策略:</p>
+<p>1:缓存未命中</p>
+<p>2:从数据库中读数据</p>
+<p>3:把数据写到缓存里</p>
+]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站过程</title>
+    <url>/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
+<p><a href="https://liangshenglei.github.io/2023/03/06/Butterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/index.html">Butterfly主题的详细配置 | 梁圣磊の博客</a></p>
+<p>域名配置加一条解析在根目录加个文件就可以了s</p>
+]]></content>
+      <categories>
+        <category>建站</category>
+      </categories>
+      <tags>
+        <tag>建站</tag>
       </tags>
   </entry>
 </search>
