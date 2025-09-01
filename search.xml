@@ -122,14 +122,18 @@
     <title>redis</title>
     <url>/2025/08/31/redis/</url>
     <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756089187615-18f058bb-238c-4411-911c-6419fe5e7cff.png" alt="img"></p>
+<p>String:适用分布式锁，共享信息等</p>
+<p>Hash:适用购物车场景</p>
+<p>List:适用消息队列</p>
+<p>Set:适用点赞场景</p>
+<p>Zset:适用与排序场景</p>
 <h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756089716986-0b9d3574-1d5f-418d-b73e-57fb6879e54b.png" alt="img"></p>
+<p>1:redis大部分操作都是在内存中进行的</p>
+<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
+<p>3:采用了io多路复用机制处理大量的客户端请求</p>
 <p>redis哪里使用了多线程:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756090407439-fd586359-7c94-4ef9-9b18-34253b295d79.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756090423976-39efb08f-2300-4029-ab6a-95895f4f4a57.png" alt="img"></p>
-<p>redis的网络模式:</p>
-<p>6.0以前reactor单线程模式，以后 多线程 I&#x2F;O + 单线程命令执行  </p>
+<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
+<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
 <h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
 <p>lua脚本</p>
 <h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
@@ -140,13 +144,12 @@
 <p>过期删除:</p>
 <p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
 <p>内存淘汰:</p>
-<p>有进行内存淘汰和不进行内存淘汰的方案</p>
 <p>不进行:不再进行服务</p>
 <p>进行:优先淘汰快过期的和最近最少访问的</p>
 <p>缓存雪崩，击穿，穿透:</p>
-<p>击穿:某个key突然失效，大量请求发送到mysql上</p>
-<p>雪崩:多个key同时失效，大量请求发送到mysql上</p>
-<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql</p>
+<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
+<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
+<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
 <p>缓存一致性:</p>
 <p>写策略:</p>
 <p>1:更新数据库的数据</p>
@@ -174,5 +177,15 @@
       <tags>
         <tag>建站</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>spring</title>
+    <url>/2025/09/01/spring/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>网络io</title>
+    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
