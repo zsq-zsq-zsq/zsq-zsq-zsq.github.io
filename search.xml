@@ -1,56 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>redis</title>
-    <url>/2025/08/31/redis/</url>
-    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
-<p>String:适用分布式锁，共享信息等</p>
-<p>Hash:适用购物车场景</p>
-<p>List:适用消息队列</p>
-<p>Set:适用点赞场景</p>
-<p>Zset:适用与排序场景</p>
-<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
-<p>1:redis大部分操作都是在内存中进行的</p>
-<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
-<p>3:采用了io多路复用机制处理大量的客户端请求</p>
-<p>redis哪里使用了多线程:</p>
-<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
-<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
-<p>lua脚本</p>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
-<p>AOF日志+RDB快照</p>
-<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
-<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
-<p>过期删除:</p>
-<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
-<p>内存淘汰:</p>
-<p>不进行:不再进行服务</p>
-<p>进行:优先淘汰快过期的和最近最少访问的</p>
-<p>缓存雪崩，击穿，穿透:</p>
-<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
-<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
-<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
-<p>缓存一致性:</p>
-<p>写策略:</p>
-<p>1:更新数据库的数据</p>
-<p>2:删掉缓存</p>
-<p>读策略:</p>
-<p>1:缓存未命中</p>
-<p>2:从数据库中读数据</p>
-<p>3:把数据写到缓存里</p>
-]]></content>
-      <categories>
-        <category>redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql</title>
-    <url>/2025/08/31/mysql/</url>
+    <url>/zsq-zsq-zsq/zsq-zsq-zsq.github.io/2025/08/31/mysql/</url>
     <content><![CDATA[<h3 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础:"></a>SQL基础:</h3><p>联表查询:</p>
 <p>用join比where效率高</p>
 <p>group by:</p>
@@ -167,33 +119,8 @@
       </tags>
   </entry>
   <entry>
-    <title>网络io</title>
-    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>计算机基础</category>
-      </categories>
-      <tags>
-        <tag>io</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>建站过程</title>
-    <url>/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
-<p><a href="https://liangshenglei.github.io/2023/03/06/Butterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/index.html">Butterfly主题的详细配置 | 梁圣磊の博客</a></p>
-<p>域名配置加一条解析在根目录加个文件就可以了s</p>
-]]></content>
-      <categories>
-        <category>建站</category>
-      </categories>
-      <tags>
-        <tag>建站</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>spring</title>
-    <url>/2025/09/01/spring/</url>
+    <url>/zsq-zsq-zsq/zsq-zsq-zsq.github.io/2025/09/01/spring/</url>
     <content><![CDATA[<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想:"></a>核心思想:</h3><p>spring的核心:</p>
 <p>IOC和AOP</p>
 <p>用到了哪些设计模式:</p>
@@ -260,6 +187,79 @@
       </categories>
       <tags>
         <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>redis</title>
+    <url>/zsq-zsq-zsq/zsq-zsq-zsq.github.io/2025/08/31/redis/</url>
+    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
+<p>String:适用分布式锁，共享信息等</p>
+<p>Hash:适用购物车场景</p>
+<p>List:适用消息队列</p>
+<p>Set:适用点赞场景</p>
+<p>Zset:适用与排序场景</p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
+<p>1:redis大部分操作都是在内存中进行的</p>
+<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
+<p>3:采用了io多路复用机制处理大量的客户端请求</p>
+<p>redis哪里使用了多线程:</p>
+<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
+<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
+<p>lua脚本</p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
+<p>AOF日志+RDB快照</p>
+<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
+<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
+<p>过期删除:</p>
+<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
+<p>内存淘汰:</p>
+<p>不进行:不再进行服务</p>
+<p>进行:优先淘汰快过期的和最近最少访问的</p>
+<p>缓存雪崩，击穿，穿透:</p>
+<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
+<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
+<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
+<p>缓存一致性:</p>
+<p>写策略:</p>
+<p>1:更新数据库的数据</p>
+<p>2:删掉缓存</p>
+<p>读策略:</p>
+<p>1:缓存未命中</p>
+<p>2:从数据库中读数据</p>
+<p>3:把数据写到缓存里</p>
+]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站过程</title>
+    <url>/zsq-zsq-zsq/zsq-zsq-zsq.github.io/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
+<p><a href="https://liangshenglei.github.io/2023/03/06/Butterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/index.html">Butterfly主题的详细配置 | 梁圣磊の博客</a></p>
+<p>域名配置加一条解析在根目录加个文件就可以了s</p>
+]]></content>
+      <categories>
+        <category>建站</category>
+      </categories>
+      <tags>
+        <tag>建站</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络io</title>
+    <url>/zsq-zsq-zsq/zsq-zsq-zsq.github.io/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+      <tags>
+        <tag>io</tag>
       </tags>
   </entry>
 </search>
