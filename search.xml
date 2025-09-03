@@ -1,6 +1,343 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JUC</title>
+    <url>/2025/09/02/JUC/</url>
+    <content><![CDATA[<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程:"></a>多线程:</h3><h4 id="多线程要注意哪些问题"><a href="#多线程要注意哪些问题" class="headerlink" title="多线程要注意哪些问题:"></a>多线程要注意哪些问题:</h4><p>原子性:提供互斥访问</p>
+<p>可见性:某个线程对主内存的修改可以及时被其他线程看到</p>
+<p>有序性:由于指令重排</p>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程:"></a>线程:</h4><p>创建线程的方式,怎样启动,怎样停止</p>
+<p>创建:</p>
+<ol>
+<li>继承Thread类</li>
+<li>实现Runnable接口</li>
+<li>实现Callable接口与FutureTask(有点不好用)</li>
+<li>使用线程池</li>
+</ol>
+<p>启动:</p>
+<p>Thread类的start()方法。</p>
+<p>如何停止:</p>
+<p>sleep()</p>
+<p>interrupt()</p>
+<p>线程的状态有哪些,blocked和waiting有什么区别:</p>
+<p>状态有哪些:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/webp/46195092/1754569066098-80209152-b0b9-4674-b314-8be91378c87e.webp" alt="img"></p>
+<p>blocked和waiting有什么区别:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754573209191-912b6d57-fcf1-402a-ad9e-4417715b53e7.png" alt="img"></p>
+<p>主要是触发条件和唤醒条件。</p>
+<p>虽然最终表现都是“线程挂起”，但 <strong>挂起的理由不同、唤醒的源头不同、重新运行前还要不要抢锁也不同</strong>。</p>
+<p>sleep和wait的区别,sleep会释放cpu吗:</p>
+<p>区别:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754570245884-6fa62888-1edf-4a04-ada5-ada0a03e1f40.png" alt="img"></p>
+<p>sleep()方法让出cpu进入阻塞队列</p>
+<p>wait()方法释放掉当前同步块的锁并且让出cpu进入阻塞队列</p>
+<p>notify和notifyAll的区别,notify选哪个线程:</p>
+<p>都是object的方法</p>
+<p>notify选择唤醒的一个线程是任意的，具体实现依赖JVM。</p>
+<p>notifyAll唤醒等待锁的所有线程</p>
+<p><code>LockSupport.park()</code>和LockSupport.unpart(): </p>
+<p>用本地方法来实现的等待与唤醒操作主要在AQS框架下使用</p>
+<h4 id="不同线程之间如何通信"><a href="#不同线程之间如何通信" class="headerlink" title="不同线程之间如何通信:"></a>不同线程之间如何通信:</h4><p>共享变量是最基本的线程间通信方式。</p>
+<p>1:Object类<br>synchronized+wait()+notify()&#x2F;notifyAll()</p>
+<p>2:显示锁+条件变量</p>
+<p>3:volatile关键字</p>
+<h3 id="并发安全"><a href="#并发安全" class="headerlink" title="并发安全:"></a>并发安全:</h3><p>等待资源的状态(blocking状态)可以分为2种:</p>
+<p>运行态的轮询，会消耗cpu</p>
+<p>挂起到阻塞态，有线程切换也会消耗cpu,还会用到系统的mutex锁</p>
+<p>synchronized和AQS都是实现类似管程的机制，他们的结构也可以一一对应上</p>
+<h4 id="锁的类别"><a href="#锁的类别" class="headerlink" title="锁的类别:"></a>锁的类别:</h4><p>如何理解可重入锁:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1755177580473-7d25f625-25f3-4063-b417-d24700e79c78.png" alt="img"></p>
+<p>如何理解乐观锁和悲观锁:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1755177528408-b5b86b6f-4e17-4114-b1c5-6c5711e30fbd.png" alt="img"></p>
+<p>如何理解公平锁和非公平锁:</p>
+<p>公平锁:多个线程按照顺序来获取锁，线程直接加入队列中排队，只有队列中第一个线程才能获得锁。</p>
+<p>非公平锁:多个线程枷锁时直接尝试获得锁，能抢到锁直接占有锁，抢不到才到等待队列中等待。</p>
+<h4 id="CAS"><a href="#CAS" class="headerlink" title="CAS:"></a>CAS:</h4><p>什么是CAS:</p>
+<p>一种乐观锁机制，包含三个操作数(内存位置，预期值，新值)，如果内存V上的值等于预期值，就将其更新为新值，整个过程是原子性的，通过硬件支持来实现的。</p>
+<p>CAS和AQS的关系:</p>
+<p>CAS为AQS提供原子操作</p>
+<p>CAS的缺点:</p>
+<p>ABA问题</p>
+<p>轮询消耗大</p>
+<p>只能保证一个共享变量操作的原子性</p>
+<p>为什么不能所有锁都用CAS:</p>
+<p>高并发情况下，大量轮询会消耗系统资源</p>
+<p>JAVA如何解决CAS的ABA问题的:</p>
+<p>通过版本号的方法</p>
+<h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized:"></a>synchronized:</h4><p>实现原理:</p>
+<p>在编译后会在同步代码块前后加上monitorenter和monitorexit。</p>
+<p>维护waitSet和entryList:</p>
+<ol>
+<li><strong>entryList</strong><br>用来存放 <strong>因为抢锁失败而被阻塞</strong> 的线程（BLOCKED）。<br>新线程或重入失败的线程都会被放到这里，等待锁被释放后由 JVM 挑选一个唤醒。</li>
+<li><strong>waitSet</strong><br>只存放 <strong>已经持有锁，但在该锁上调用了 <code>obj.wait()</code> 的线程</strong>（WAITING&#x2F;TIMED_WAITING）。<br>这些线程<strong>必须先拿到过锁</strong>，主动放弃锁并等待 <code>notify/notifyAll</code> 才会被放进去。</li>
+</ol>
+<p>讲解下锁升级:</p>
+<p>无锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
+<ol>
+<li>无锁（001）<br>刚 new 出来的对象、计算过 hashCode 或偏向延迟未过前都处此状态。<br>不等于“没加锁”，只是<strong>尚未偏向任何线程</strong>。</li>
+<li>偏向锁（101）<ul>
+<li>启动后 4 s（<code>-XX:BiasedLockingStartupDelay</code>）内不会启用，所以<strong>“无锁→偏向锁”有延迟</strong>。</li>
+<li>第一次加锁时把<strong>当前线程 ID 写入 mark word</strong>，之后该线程进出同步块<strong>不做任何 CAS</strong>，性能最高。</li>
+<li>只要出现<strong>任何竞争</strong>（即使是同一线程重入以外的线程尝试查看锁），偏向立即撤销。</li>
+</ul>
+</li>
+<li>轻量级锁（00）<ul>
+<li>撤销偏向后或<strong>第二个线程尝试加锁</strong>时进入。</li>
+<li><strong>原持有线程</strong>先把 mark word 拷贝到栈帧锁记录（Displaced Mark Word），<strong>后到的线程</strong>在<strong>自己栈帧</strong>里自旋 CAS。</li>
+<li><strong>自旋次数</strong>由 <code>-XX:PreBlockSpin</code> 或自适应算法决定；自旋失败才膨胀。</li>
+</ul>
+</li>
+<li>重量级锁（10）<ul>
+<li>自旋失败、或锁被<strong>重入次数过多</strong>、或<strong>等待线程数 &gt; CPU 核心数</strong>时膨胀为 monitor。</li>
+<li>此时线程被<strong>操作系统</strong>挂起&#x2F;唤醒（<code>pthread_cond_wait</code>&#x2F;<code>futex</code>），开销最大。</li>
+</ul>
+</li>
+</ol>
+<p>synchronized支持可重入吗：</p>
+<p>支持。</p>
+<p>synchronized是公平锁吗:</p>
+<p>不是。</p>
+<p>被唤醒的线程要跟还没进入队列的线程一起抢</p>
+<h4 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal:"></a>ThreadLocal:</h4><p>作用:</p>
+<p>线程隔离:为每个线程提供了独立的变量副本，线程之间不会相互影响</p>
+<p>降低耦合度:在同一个线程内的多个函数或组件之间，使用ThreadLocal可以减少参数的传递，降低代码之间的耦合度</p>
+<p>原理:</p>
+<p>依赖于Thread中的ThreadLocalMap字段</p>
+<p>有set(),get(),remove()方法</p>
+<p>可能存在的问题:<br>ThreadLocalMap中key(也就是ThreadLocal)是弱引用，value是强引用，如果不清除，key就睡随着GC销毁而value就会留在那里造成内存泄漏。可以通过用remove()方法来解决。</p>
+<h4 id="voliatle"><a href="#voliatle" class="headerlink" title="voliatle:"></a>voliatle:</h4><p>作用:</p>
+<p>保证变量对所有线程的可见性:被修饰的变量每次写都会立刻刷新回主存，每次读都从主存中读取。</p>
+<p>禁止指令重排序优化。</p>
+<p>指令重排序的原理:</p>
+<p>重排指令，单线程下不影响程序执行逻辑，提高性能。</p>
+<p>能保证线程安全吗</p>
+<p>只能保证可见性</p>
+<p>Java内存模型:</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池:"></a>线程池:</h3><p>核心思想:</p>
+<p>通过线程复用来避免频繁的线程销毁和创建。</p>
+<p>工作原理:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754662277760-a56a7761-89c8-4c77-ad1c-296b6aab457f.png" alt="img"></p>
+<p>参数:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754662419254-afccd2e8-3751-4cfb-ae41-00aae5ba6ab1.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754662439042-384ff78a-f5fc-4b3e-b9e6-98155821031a.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>java基础</title>
+    <url>/2025/09/02/java%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="java概述"><a href="#java概述" class="headerlink" title="java概述:"></a>java概述:</h2><p>什么是java?</p>
+<p>同时，Java 又是一门平台无关的编程语言，即一次编译，处处运行。</p>
+<p>Java 没有了指针的概念，实现了内存的自动管理，而 C 语言需要使用 malloc 和 free 来手动管理内存。</p>
+<p>java的语言特性:</p>
+<p>①、面向对象</p>
+<p>②、平台无关性</p>
+<p>③、支持多线程</p>
+<p>④、支持 JIT 编译</p>
+<p>jvm,jdk,jre的区别:</p>
+<p><strong>JVM</strong>：也就是 Java 虚拟机，是 Java 实现跨平台的关键所在，不同的操作系统有不同的 JVM 实现。JVM 负责将 Java 字节码转换为特定平台的机器码，并执行。</p>
+<p><strong>JRE</strong>：也就是 Java 运行时环境，包含了运行 Java 程序所必需的库，以及 JVM。</p>
+<p><strong>JDK</strong>：</p>
+<p>简单来说，JDK 包含 JRE，JRE 包含 JVM。</p>
+<p>为什么有人说java是编译与解释并存的语言?</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型:"></a>数据类型:</h2><p>八种基本的数据类型:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753968912620-c42b368a-1a9f-4bec-b81c-69fbde0b7f59.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753969057586-2888daf3-ec3a-4184-ae49-d6a931054251.png" alt="img"></p>
+<p>数据类型的转换方式,会出什么问题?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974514442-a6bc190e-9195-4106-b602-392b140830a4.png" alt="img"></p>
+<p>基本数据类型转换问题:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974649920-f0bda344-55cc-4df1-b11a-75e70a372a44.png" alt="img"></p>
+<p>引用数据类型转换问题:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974631932-8de19930-3311-4c6e-8bfc-5341049a2f60.png" alt="img"></p>
+<h4 id="为什么用BigDemical不用double"><a href="#为什么用BigDemical不用double" class="headerlink" title="为什么用BigDemical不用double?"></a>为什么用BigDemical不用double?</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974689386-f9c7abba-bd63-4fa8-a400-2b3722e2e8b0.png" alt="img"></p>
+<h4 id="装箱拆箱"><a href="#装箱拆箱" class="headerlink" title="装箱拆箱:"></a>装箱拆箱:</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974728409-d0845e21-5171-47e1-9b22-7011aaf257c5.png" alt="img"></p>
+<p>弊端:<br>创建多余对象</p>
+<h4 id="Integer"><a href="#Integer" class="headerlink" title="Integer:"></a>Integer:</h4><p>与int相比有什么优点?为什么保留int?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974868513-68f45e28-3c8e-4008-8aba-b1f1772c5730.png" alt="img"></p>
+<p>说下Integer的缓存?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974852026-07a06035-4200-4ac2-bbcf-affd9c9bad40.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>redis</title>
+    <url>/2025/08/31/redis/</url>
+    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
+<p>String:适用分布式锁，共享信息等</p>
+<p>Hash:适用购物车场景</p>
+<p>List:适用消息队列</p>
+<p>Set:适用点赞场景</p>
+<p>Zset:适用与排序场景</p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
+<p>1:redis大部分操作都是在内存中进行的</p>
+<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
+<p>3:采用了io多路复用机制处理大量的客户端请求</p>
+<p>redis哪里使用了多线程:</p>
+<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
+<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
+<p>lua脚本</p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
+<p>AOF日志+RDB快照</p>
+<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
+<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
+<p>过期删除:</p>
+<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
+<p>内存淘汰:</p>
+<p>不进行:不再进行服务</p>
+<p>进行:优先淘汰快过期的和最近最少访问的</p>
+<p>缓存雪崩，击穿，穿透:</p>
+<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
+<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
+<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
+<p>缓存一致性:</p>
+<p>写策略:</p>
+<p>1:更新数据库的数据</p>
+<p>2:删掉缓存</p>
+<p>读策略:</p>
+<p>1:缓存未命中</p>
+<p>2:从数据库中读数据</p>
+<p>3:把数据写到缓存里</p>
+]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>spring</title>
+    <url>/2025/09/01/spring/</url>
+    <content><![CDATA[<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想:"></a>核心思想:</h3><p>spring的核心:</p>
+<p>IOC和AOP</p>
+<p>用到了哪些设计模式:</p>
+<p>bean的创建:</p>
+<p>单例模式</p>
+<p>工厂模式</p>
+<h3 id="ioc"><a href="#ioc" class="headerlink" title="ioc:"></a>ioc:</h3><p>对ioc的理解?</p>
+<p>用ioc容器来控制对象,控制就是对象的创建，初始化，销毁。解决了繁琐的对象生命周期操作。</p>
+<p>ioc如何实现的?</p>
+<p>依赖注入和容器实现</p>
+<p>依赖注入，控制反转分别是什么?</p>
+<p>控制反转:流程的控制权从程序员变成了框架</p>
+<p>依赖注入:将依赖的类对象通过在外部创建好通过构造函数，函数参数等方式给类使用</p>
+<p>如何实现依赖注入:</p>
+<p>构造器注入</p>
+<p>Setter方法注入</p>
+<p>字段注入</p>
+<p>spring容器里存储的是什么?</p>
+<p>Bean对象</p>
+<p>Bean是单例的吗?</p>
+<p>默认是单例，也可以通过修改作用域使Bean在每次请求都会创建一个实例。</p>
+<p>单例Bean要考虑线程安全问题。</p>
+<p>Bean的作用域:</p>
+<p>可以通过scope注解自定义实现，默认都是单例，还有像prototype这样的。</p>
+<p>Bean的生命周期</p>
+<p>生命周期:</p>
+<p>1:实例化</p>
+<p>2:属性赋值</p>
+<p>3:初始化方法:</p>
+<p>初始化的前置方法</p>
+<p>初始化方法</p>
+<p>初始化的后置方法</p>
+<p>4:使用</p>
+<p>5:销毁</p>
+<p>spring如何解决循环依赖?三级缓存结构是什么?为什么用三级缓存解决循环依赖问题?</p>
+<p>1:</p>
+<p>三级缓存</p>
+<p>2:</p>
+<p>一级是已经完成实例化的</p>
+<p>二级是正在进行属性注入但是发现有循环依赖的</p>
+<p>三级是未经加工的工厂，里面创建了原始类，可以通过这个工厂的getObject来获取这个类，如果这个类被代理就会创建代理对象</p>
+<p>3:</p>
+<p>为了正确处理AOP代理的Bean。<br><strong>三级缓存只是提前“借调”了一次同样的钩子，保证循环依赖时注入的引用就是最终形态，且不会重复生成代理。</strong></p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP:"></a>AOP:</h3><p>AOP的概念:</p>
+<p>面向切面编程,能够将与业务无关，却为业务模块所共同调用的逻辑封装起来</p>
+<p>大大降低了代码的重复率，降低模块之间的耦合度。</p>
+<p>AOP通过什么机制实现的?</p>
+<p>动态代理</p>
+<h3 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理:"></a>事务管理:</h3><p>概念:</p>
+<p>spring提供了一致的事务管理接口，支持声明式和编程式事务。</p>
+<p>什么时候会失效?</p>
+<p>第一种，<code>@Transactional</code> 注解用在非 public 修饰的方法上。</p>
+<p>因为:Spring 的 AOP 代理机制决定了它无法代理 private 方法。</p>
+<p>第二种，方法内部调用。</p>
+<p>原因:使用的是 this 引用，直接访问原始对象的方法，绕过了 Spring 的代理对象，也就导致代理对象中的事务逻辑没有机会执行。</p>
+<p>第三种，如果在事务方法内部用 try-catch 捕获了异常，但没有在 catch 块中将异常重新抛出，或者抛出一个新的能触发回滚的异常。</p>
+<p>原因:那么 Spring 的事务拦截器就无法感知到异常的发生，也就没办法回滚。</p>
+<p>第四种，Spring 事务默认只对 RuntimeException 和 Error 类型的异常进行回滚。</p>
+<h3 id="springmvc"><a href="#springmvc" class="headerlink" title="springmvc:"></a>springmvc:</h3><p>处理流程:</p>
+<p>1:用户发起的 HTTP 请求，首先会被 DispatcherServlet 捕获</p>
+<p>2:会根据 URL、请求方法等信息，交给 HandlerMapping 进行路由匹配，查找对应的处理器，也就是 Controller 中的具体方法。</p>
+<p>3:找到对应 Controller 方法后，DispatcherServlet 会委托给处理器适配器 HandlerAdapter 进行调用。</p>
+<p>4:Controller 方法最终会返回结果，比如视图名称、ModelAndView 或直接返回 JSON 数据。</p>
+<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot:"></a>springboot:</h3><p>springboot比spring好在哪?</p>
+<p>提供了自动配置</p>
+<p>内嵌多种服务器</p>
+<p>自动配置和自动装配:</p>
+<p>自动配置:</p>
+<p>classpath中有springboot-starter-*就默认注册所需的全套Bean</p>
+<p>一些相关配置只需要在yml中改改就可以了</p>
+<p>自动装配:</p>
+<p>是实现自动配置的方法</p>
+<p>约定优于配置:</p>
+<p><strong>Spring Boot 先帮 80 % 的场景定好“潜规则”，你按规则放东西就行；只有剩下 20 % 的个性化需求才需要你去改 yml 或写配置。</strong></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java集合</title>
+    <url>/2025/09/02/java%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>网络io</title>
+    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+      <tags>
+        <tag>io</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站过程</title>
+    <url>/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
+<p><a href="https://liangshenglei.github.io/2023/03/06/Butterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/index.html">Butterfly主题的详细配置 | 梁圣磊の博客</a></p>
+<p>域名配置加一条解析在根目录加个文件就可以了s</p>
+]]></content>
+      <categories>
+        <category>建站</category>
+      </categories>
+      <tags>
+        <tag>建站</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JVM</title>
+    <url>/2025/09/02/JVM/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>mysql</title>
     <url>/2025/08/31/mysql/</url>
     <content><![CDATA[<h3 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础:"></a>SQL基础:</h3><p>联表查询:</p>
@@ -116,164 +453,6 @@
       </categories>
       <tags>
         <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>spring</title>
-    <url>/2025/09/01/spring/</url>
-    <content><![CDATA[<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想:"></a>核心思想:</h3><p>spring的核心:</p>
-<p>IOC和AOP</p>
-<p>用到了哪些设计模式:</p>
-<p>bean的创建:</p>
-<p>单例模式</p>
-<p>工厂模式</p>
-<h3 id="ioc"><a href="#ioc" class="headerlink" title="ioc:"></a>ioc:</h3><p>对ioc的理解?</p>
-<p>用ioc容器来控制对象,控制就是对象的创建，初始化，销毁。解决了繁琐的对象生命周期操作。</p>
-<p>ioc如何实现的?</p>
-<p>依赖注入和容器实现</p>
-<p>依赖注入，控制反转分别是什么?</p>
-<p>控制反转:流程的控制权从程序员变成了框架</p>
-<p>依赖注入:将依赖的类对象通过在外部创建好通过构造函数，函数参数等方式给类使用</p>
-<p>如何实现依赖注入:</p>
-<p>构造器注入</p>
-<p>Setter方法注入</p>
-<p>字段注入</p>
-<p>spring容器里存储的是什么?</p>
-<p>Bean对象</p>
-<p>Bean是单例的吗?</p>
-<p>默认是单例，也可以通过修改作用域使Bean在每次请求都会创建一个实例。</p>
-<p>单例Bean要考虑线程安全问题。</p>
-<p>Bean的作用域:</p>
-<p>可以通过scope注解自定义实现，默认都是单例，还有像prototype这样的。</p>
-<p>Bean的生命周期</p>
-<p>生命周期:</p>
-<p>1:实例化</p>
-<p>2:属性赋值</p>
-<p>3:初始化方法:</p>
-<p>初始化的前置方法</p>
-<p>初始化方法</p>
-<p>初始化的后置方法</p>
-<p>4:使用</p>
-<p>5:销毁</p>
-<p>spring如何解决循环依赖?三级缓存结构是什么?为什么用三级缓存解决循环依赖问题?</p>
-<p>1:</p>
-<p>三级缓存</p>
-<p>2:</p>
-<p>一级是已经完成实例化的</p>
-<p>二级是正在进行属性注入但是发现有循环依赖的</p>
-<p>三级是未经加工的工厂，里面创建了原始类，可以通过这个工厂的getObject来获取这个类，如果这个类被代理就会创建代理对象</p>
-<p>3:</p>
-<p>为了正确处理AOP代理的Bean。<br><strong>三级缓存只是提前“借调”了一次同样的钩子，保证循环依赖时注入的引用就是最终形态，且不会重复生成代理。</strong></p>
-<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP:"></a>AOP:</h3><p>AOP的概念:</p>
-<p>面向切面编程,能够将与业务无关，却为业务模块所共同调用的逻辑封装起来</p>
-<p>大大降低了代码的重复率，降低模块之间的耦合度。</p>
-<p>AOP通过什么机制实现的?</p>
-<p>动态代理</p>
-<h3 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理:"></a>事务管理:</h3><p>概念:</p>
-<p>spring提供了一致的事务管理接口，支持声明式和编程式事务。</p>
-<p>什么时候会失效?</p>
-<p>第一种，<code>@Transactional</code> 注解用在非 public 修饰的方法上。</p>
-<p>因为:Spring 的 AOP 代理机制决定了它无法代理 private 方法。</p>
-<p>第二种，方法内部调用。</p>
-<p>原因:使用的是 this 引用，直接访问原始对象的方法，绕过了 Spring 的代理对象，也就导致代理对象中的事务逻辑没有机会执行。</p>
-<p>第三种，如果在事务方法内部用 try-catch 捕获了异常，但没有在 catch 块中将异常重新抛出，或者抛出一个新的能触发回滚的异常。</p>
-<p>原因:那么 Spring 的事务拦截器就无法感知到异常的发生，也就没办法回滚。</p>
-<p>第四种，Spring 事务默认只对 RuntimeException 和 Error 类型的异常进行回滚。</p>
-<h3 id="springmvc"><a href="#springmvc" class="headerlink" title="springmvc:"></a>springmvc:</h3><p>处理流程:</p>
-<p>1:用户发起的 HTTP 请求，首先会被 DispatcherServlet 捕获</p>
-<p>2:会根据 URL、请求方法等信息，交给 HandlerMapping 进行路由匹配，查找对应的处理器，也就是 Controller 中的具体方法。</p>
-<p>3:找到对应 Controller 方法后，DispatcherServlet 会委托给处理器适配器 HandlerAdapter 进行调用。</p>
-<p>4:Controller 方法最终会返回结果，比如视图名称、ModelAndView 或直接返回 JSON 数据。</p>
-<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot:"></a>springboot:</h3><p>springboot比spring好在哪?</p>
-<p>提供了自动配置</p>
-<p>内嵌多种服务器</p>
-<p>自动配置和自动装配:</p>
-<p>自动配置:</p>
-<p>classpath中有springboot-starter-*就默认注册所需的全套Bean</p>
-<p>一些相关配置只需要在yml中改改就可以了</p>
-<p>自动装配:</p>
-<p>是实现自动配置的方法</p>
-<p>约定优于配置:</p>
-<p><strong>Spring Boot 先帮 80 % 的场景定好“潜规则”，你按规则放东西就行；只有剩下 20 % 的个性化需求才需要你去改 yml 或写配置。</strong></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网络io</title>
-    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>计算机基础</category>
-      </categories>
-      <tags>
-        <tag>io</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>redis</title>
-    <url>/2025/08/31/redis/</url>
-    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
-<p>String:适用分布式锁，共享信息等</p>
-<p>Hash:适用购物车场景</p>
-<p>List:适用消息队列</p>
-<p>Set:适用点赞场景</p>
-<p>Zset:适用与排序场景</p>
-<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
-<p>1:redis大部分操作都是在内存中进行的</p>
-<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
-<p>3:采用了io多路复用机制处理大量的客户端请求</p>
-<p>redis哪里使用了多线程:</p>
-<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
-<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
-<p>lua脚本</p>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
-<p>AOF日志+RDB快照</p>
-<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
-<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
-<p>过期删除:</p>
-<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
-<p>内存淘汰:</p>
-<p>不进行:不再进行服务</p>
-<p>进行:优先淘汰快过期的和最近最少访问的</p>
-<p>缓存雪崩，击穿，穿透:</p>
-<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
-<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
-<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
-<p>缓存一致性:</p>
-<p>写策略:</p>
-<p>1:更新数据库的数据</p>
-<p>2:删掉缓存</p>
-<p>读策略:</p>
-<p>1:缓存未命中</p>
-<p>2:从数据库中读数据</p>
-<p>3:把数据写到缓存里</p>
-]]></content>
-      <categories>
-        <category>redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>建站过程</title>
-    <url>/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
-<p><a href="https://liangshenglei.github.io/2023/03/06/Butterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/index.html">Butterfly主题的详细配置 | 梁圣磊の博客</a></p>
-<p>域名配置加一条解析在根目录加个文件就可以了s</p>
-]]></content>
-      <categories>
-        <category>建站</category>
-      </categories>
-      <tags>
-        <tag>建站</tag>
       </tags>
   </entry>
 </search>
