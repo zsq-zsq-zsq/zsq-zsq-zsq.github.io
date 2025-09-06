@@ -1,6 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>java基础</title>
+    <url>/2025/09/02/java%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="java概述"><a href="#java概述" class="headerlink" title="java概述:"></a>java概述:</h2><p>什么是java?</p>
+<p>同时，Java 又是一门平台无关的编程语言，即一次编译，处处运行。</p>
+<p>Java 没有了指针的概念，实现了内存的自动管理，而 C 语言需要使用 malloc 和 free 来手动管理内存。</p>
+<p>java的语言特性:</p>
+<p>①、面向对象</p>
+<p>②、平台无关性</p>
+<p>③、支持多线程</p>
+<p>④、支持 JIT 编译,编译与解释并存</p>
+<p>jvm,jdk,jre的区别:</p>
+<p><strong>JVM</strong>：也就是 Java 虚拟机，是 Java 实现跨平台的关键所在，不同的操作系统有不同的 JVM 实现。JVM 负责将 Java 字节码转换为特定平台的机器码，并执行。</p>
+<p><strong>JRE</strong>：也就是 Java 运行时环境，包含了运行 Java 程序所必需的库，以及 JVM。</p>
+<p><strong>JDK</strong>：在JRE的基础上有了编译器，能将java源代码编译成字节码文件</p>
+<p>简单来说，JDK 包含 JRE，JRE 包含 JVM。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型:"></a>数据类型:</h2><p>八种基本的数据类型:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753968912620-c42b368a-1a9f-4bec-b81c-69fbde0b7f59.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753969057586-2888daf3-ec3a-4184-ae49-d6a931054251.png" alt="img"></p>
+<p>基本数据类型的转换方式,会出什么问题?</p>
+<p>低精度转高精度可以自动转换</p>
+<p>高精度转低精度需要强制转换可能会发生数据溢出或精度损失</p>
+<p>引用数据类型转换问题:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974631932-8de19930-3311-4c6e-8bfc-5341049a2f60.png" alt="img"></p>
+<p>装箱拆箱:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974728409-d0845e21-5171-47e1-9b22-7011aaf257c5.png" alt="img"></p>
+<p>弊端:<br>创建多余对象</p>
+<p>为什么用BigDemical不用double?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974689386-f9c7abba-bd63-4fa8-a400-2b3722e2e8b0.png" alt="img"></p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>说下Integer的缓存?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974852026-07a06035-4200-4ac2-bbcf-affd9c9bad40.png" alt="img"></p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象:"></a>面向对象:</h2><p>怎样理解面向对象,和面向对象的三大特性:</p>
+<p>将事务抽象成对象。</p>
+<p>三大特性:</p>
+<p>封装:把对象的属性和行为结合在一起</p>
+<p>继承:子类共享父类的数据和方法。是代码复用的重要手段<br>多态:不同的对象对同一个接口做出不同的反应</p>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态:"></a>多态:</h4><p>体现:</p>
+<p>方法重载和重写</p>
+<p>接口的实现</p>
+<p>解决的问题:</p>
+<p>提高了代码的复用性和扩展性。</p>
+<h4 id="普通类，抽象类，接口"><a href="#普通类，抽象类，接口" class="headerlink" title="普通类，抽象类，接口:"></a>普通类，抽象类，接口:</h4><p>普通类和抽象类:</p>
+<p>抽象类不能实例化不能被final修饰，可以存在没有实现的方法。</p>
+<p>接口和抽象类:<br>就是类和接口的区别</p>
+<h2 id="Object"><a href="#Object" class="headerlink" title="Object:"></a>Object:</h2><h4 id="和equal"><a href="#和equal" class="headerlink" title="&#x3D;&#x3D;和equal:"></a>&#x3D;&#x3D;和equal:</h4><p>在 Java 中，<code>==</code> 操作符和 <code>equals()</code> 方法用于比较两个对象：</p>
+<p>①、&#x3D;&#x3D;：用于比较两个对象的引用，即它们是否指向同一个对象实例。</p>
+<p>如果两个变量引用同一个对象实例，<code>==</code> 返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>对于基本数据类型（如 <code>int</code>, <code>double</code>, <code>char</code> 等），<code>==</code> 比较的是值是否相等。</p>
+<p>②、<strong>equals() 方法</strong>：用于比较两个对象的内容是否相等。</p>
+<p>默认情况下，<code>equals()</code> 方法的行为与 <code>==</code> 相同，即比较对象引用。</p>
+<p>然而<code>equals()</code> 方法通常被各种类重写。例如，<code>String</code> 类重写了 <code>equals()</code> 方法，以便它可以比较两个字符串的字符内容是否完全一样。</p>
+<h4 id="equal和hashcode"><a href="#equal和hashcode" class="headerlink" title="equal和hashcode:"></a>equal和hashcode:</h4><p>因为基于哈希的集合类（如 HashMap）需要基于这一点来正确存储和查找对象。</p>
+<p><a href="https://javabetter.cn/sidebar/sanfene/javase.html#%E4%BB%80%E4%B9%88%E6%98%AF-hashcode-%E6%96%B9%E6%B3%95">什么是 hashCode 方法？</a></p>
+<p><code>hashCode()</code> 方法的作⽤是获取哈希码，它会返回⼀个 int 整数，定义在 <a href="https://javabetter.cn/oo/object-class.html">Object 类</a>中， 是一个本地⽅法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public native int hashCode();</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://javabetter.cn/sidebar/sanfene/javase.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-hashcode-%E6%96%B9%E6%B3%95">为什么要有 hashCode 方法？</a></p>
+<p>目的就是获取一个对象的key</p>
+<p>为什么hashCode相同但是它们也不一定相等?</p>
+<p>可能存在hash冲突</p>
+<p><a href="https://javabetter.cn/sidebar/sanfene/javase.html#hashcode-%E5%92%8C-equals-%E6%96%B9%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB">hashCode 和 equals 方法的关系？</a></p>
+<p>如果两个对象通过 equals 相等，它们的 hashCode 必须相等。否则会导致哈希表类数据结构的行为异常。</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字:"></a>关键字:</h2><h4 id="final的作用"><a href="#final的作用" class="headerlink" title="final的作用:"></a>final的作用:</h4><p>修饰类时类不能被继承</p>
+<p>修饰方法时方法不能被重写</p>
+<p>修饰变量时赋值后就不能被改变</p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型:"></a>泛型:</h2><p>为什么需要泛型:</p>
+<p>多种数据类型需要执行相同代码，使用泛型不需要强制类型转换。</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理:"></a>异常处理:</h2><p>异常的处理方式:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1752414491689-a86d28c3-751d-4c3b-bca7-30239bb71c2d.png" alt="img"></p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解:"></a>注解:</h2><p>注解可以标记在类上、方法上、属性上等，标记自身也可以设置一些值</p>
+<p>2个属性:</p>
+<p>注解可以标记在类上、方法上、属性上等</p>
+<p>注解生命周期有三大类，分别是：</p>
+<ul>
+<li>RetentionPolicy.SOURCE：给编译器用的，不会写入 class 文件</li>
+<li>RetentionPolicy.CLASS：会写入 class 文件，在类加载阶段丢弃，也就是运行的时候就没这个信息了</li>
+<li>RetentionPolicy.RUNTIME：会写入 class 文件，永久保存，可以通过反射获取注解信息</li>
+</ul>
+<h2 id="反射和代理"><a href="#反射和代理" class="headerlink" title="反射和代理:"></a>反射和代理:</h2><p>硬编码和软编码</p>
+<p>反射:</p>
+<p>java实现软编码的一种方式，可以通过改变字符串的值来创建不同的对象，让代码来控制代码。</p>
+<p>应用场景:</p>
+<p>通过类名来获取对应对象</p>
+<p>两个对象进行转换</p>
+<p>代理:</p>
+<p><strong>代理模式的核心就是“包装”原对象，因此必须有两个对象：一个是原对象，一个是代理对象。</strong><br>代理对象内部持有原对象的引用，通过转发、增强、控制访问等方式实现功能扩展。</p>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化:"></a>序列化:</h2><p>什么是序列化?什么是反序列化?</p>
+<p>序列化（Serialization）是指将对象转换为字节流的过程，以便能够将该对象保存到文件、数据库，或者进行网络传输。</p>
+<p>反序列化（Deserialization）就是将字节流转换回对象的过程，以便构建原始对象。</p>
+<p>常见的序列化方式:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753796921040-c05d4fae-f52c-403b-b51e-176fa7dc04e8.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>java集合</title>
+    <url>/2025/09/02/java%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[<h3 id="List"><a href="#List" class="headerlink" title="List:"></a>List:</h3><p>List可以一遍遍历一边修改元素吗?</p>
+<p><strong>fail-fast 机制决定了“结构修改”会抛异常，因此</strong> <code>**ArrayList**</code> <strong>等集合</strong><br><strong>不允许在遍历过程中绕开迭代器去增删元素；</strong><br><strong>但允许通过迭代器自身提供的</strong> <code>**set/add/remove**</code> <strong>安全地修改内容。</strong></p>
+<p>ArrayList和LinkedList有什么区别:</p>
+<p>ArrayList 是基于数组实现的，LinkedList 是基于链表实现的。</p>
+<p>多数情况下，ArrayList 更利于查找，LinkedList 更利于增删。</p>
+<p>ArrayList的扩容机制?</p>
+<p>计算新容量</p>
+<p>创建新数组，将原有数据复制</p>
+<p>更新引用</p>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map:"></a>Map:</h3><p>HashMap的底层数据结构:</p>
+<p>数组+链表+红黑树</p>
+<p>hash函数:</p>
+<p>HashMap的hash函数怎么设计的?</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    // 如果 key 为 null，返回 0；否则，使用 hashCode 并进行扰动</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为什么能减少hash冲突?</p>
+<p>快速回答：哈希表的索引是通过 <code>h &amp; (n-1)</code> 计算的，n 是底层数组的容量；n-1 和某个哈希值做 <code>&amp;</code> 运算，相当于截取了最低的四位。如果数组的容量很小，只取 h 的低位很容易导致哈希冲突。</p>
+<p>通过异或操作将 h 的高位引入低位，可以增加哈希值的随机性，从而减少哈希冲突。</p>
+<p>解决hash冲突的方法有哪些?</p>
+<p>我知道的有 3 种，再哈希法、开放地址法和拉链法。</p>
+<p>用拉链法如何判断Key相等:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (e.hash == hash &amp;&amp;</span><br><span class="line">((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>put()流程:</p>
+<p>计算hash值之后再计算索引</p>
+<p>判断是否为空，如果不为空判断是否需要树化</p>
+<p>插入后判断是否需要扩容</p>
+<p>查找:</p>
+<p>根据key值先计算hash值之后再计算索引</p>
+<p>判断是否为空如果不为空就判断是否匹配，</p>
+<p>如果不匹配就遍历链表或红黑树找匹配的节点</p>
+<p>容量:</p>
+<p>为什么容量是2的幂次方?</p>
+<p>数组长度-1 正好相当于一个“低位掩码”——掩码的低位最好全是 1，这样 &amp; 运算结果会在0到数组长度-1的范围内。</p>
+<p>初始化时候传一个17的容量他会怎么处理?</p>
+<p>HashMap 会将容量调整到大于等于 17 的最小的 2 的幂次方，也就是 32。</p>
+<p>除非是比较大为了防止多次扩容影响效率，一般不回初始化时候传入容量</p>
+<h4 id="HashMap的扩容"><a href="#HashMap的扩容" class="headerlink" title="HashMap的扩容:"></a>HashMap的扩容:</h4><p>扩容发生在什么时候:</p>
+<p>当键值对数量超过阈值，也就是容量 * 负载因子时。</p>
+<p><a href="https://javabetter.cn/sidebar/sanfene/collection.html#%E9%BB%98%E8%AE%A4%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E6%98%AF%E5%A4%9A%E5%B0%91">默认的负载因子是多少？</a></p>
+<p>0.75。这是个经验值</p>
+<p><a href="https://javabetter.cn/sidebar/sanfene/collection.html#%E5%88%9D%E5%A7%8B%E5%AE%B9%E9%87%8F%E6%98%AF%E5%A4%9A%E5%B0%91">初始容量是多少？</a></p>
+<p>16。</p>
+<p>扩容机制:</p>
+<p>扩容时，HashMap 会创建一个新的数组，其容量是原来的两倍。然后遍历旧哈希表中的元素，将其重新分配到新的哈希表中。</p>
+<p>如果当前桶中只有一个元素，那么直接通过键的哈希值与数组大小取模锁定新的索引位置：<code>e.hash &amp; (newCap - 1)</code>。</p>
+<p>如果当前桶是红黑树，那么会调用 <code>split()</code> 方法分裂树节点，以保证树的平衡。</p>
+<p>如果当前桶是链表，会通过旧键的哈希值与旧的数组大小取模 <code>(e.hash &amp; oldCap) == 0</code> 来作为判断条件，如果条件为真，元素保留在原索引的位置；否则元素移动到原索引 + 旧数组大小的位置。</p>
+<p>为什么链表转红黑树的阈值是8?</p>
+<p>阈值为什么要选 8 呢？和统计学有关。理想情况下，使用随机哈希码，链表里的节点符合泊松分布，出现节点个数的概率是递减的，节点个数为 8 的情况，发生概率仅为0.00000006。</p>
+<p>至于红黑树转回链表的阈值为什么是 6，而不是 8？是因为如果这个阈值也设置成 8，假如发生碰撞，节点增减刚好在 8 附近，会发生链表和红黑树的不断转换，导致资源浪费。</p>
+<h4 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题:"></a>线程安全问题:</h4><p>①、多线程下扩容会死循环。JDK7 中的 HashMap 使用的是头插法来处理链表，在多线程环境下扩容会出现环形链表，造成死循环。在JDK8中用尾插法处理解决了这个问题</p>
+<p>②、多线程在进行 put 元素的时候，可能会导致元素丢失。因为计算出来的位置可能会被其他线程覆盖掉，比如说一个线程 put 3 的时候，另外一个线程 put 了 7，就把 3 给弄丢了。</p>
+<p>③、put 和 get 并发时，可能导致 get 为 null。线程 1 执行 put 时，因为元素个数超出阈值而扩容，线程 2 此时执行 get，就有可能出现这个问题。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JUC</title>
     <url>/2025/09/02/JUC/</url>
     <content><![CDATA[<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程:"></a>多线程:</h3><h4 id="多线程要注意哪些问题"><a href="#多线程要注意哪些问题" class="headerlink" title="多线程要注意哪些问题:"></a>多线程要注意哪些问题:</h4><p>原子性:提供互斥访问</p>
@@ -128,413 +290,6 @@
       </categories>
   </entry>
   <entry>
-    <title>java集合</title>
-    <url>/2025/09/02/java%E9%9B%86%E5%90%88/</url>
-    <content><![CDATA[<h3 id="List"><a href="#List" class="headerlink" title="List:"></a>List:</h3><p>List可以一遍遍历一边修改元素吗?</p>
-<p><strong>fail-fast 机制决定了“结构修改”会抛异常，因此</strong> <code>**ArrayList**</code> <strong>等集合</strong><br><strong>不允许在遍历过程中绕开迭代器去增删元素；</strong><br><strong>但允许通过迭代器自身提供的</strong> <code>**set/add/remove**</code> <strong>安全地修改内容。</strong></p>
-<p>ArrayList和LinkedList有什么区别:</p>
-<p>ArrayList 是基于数组实现的，LinkedList 是基于链表实现的。</p>
-<p>多数情况下，ArrayList 更利于查找，LinkedList 更利于增删。</p>
-<p>ArrayList的扩容机制?</p>
-<p>计算新容量</p>
-<p>创建新数组，将原有数据复制</p>
-<p>更新引用</p>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map:"></a>Map:</h3><p>HashMap的底层数据结构:</p>
-<p>数组+链表+红黑树</p>
-<p>hash函数:</p>
-<p>HashMap的hash函数怎么设计的?</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    // 如果 key 为 null，返回 0；否则，使用 hashCode 并进行扰动</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>为什么能减少hash冲突?</p>
-<p>快速回答：哈希表的索引是通过 <code>h &amp; (n-1)</code> 计算的，n 是底层数组的容量；n-1 和某个哈希值做 <code>&amp;</code> 运算，相当于截取了最低的四位。如果数组的容量很小，只取 h 的低位很容易导致哈希冲突。</p>
-<p>通过异或操作将 h 的高位引入低位，可以增加哈希值的随机性，从而减少哈希冲突。</p>
-<p>解决hash冲突的方法有哪些?</p>
-<p>我知道的有 3 种，再哈希法、开放地址法和拉链法。</p>
-<p>用拉链法如何判断Key相等:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (e.hash == hash &amp;&amp;</span><br><span class="line">((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>put()流程:</p>
-<p>计算hash值之后再计算索引</p>
-<p>判断是否为空，如果不为空判断是否需要树化</p>
-<p>插入后判断是否需要扩容</p>
-<p>查找:</p>
-<p>根据key值先计算hash值之后再计算索引</p>
-<p>判断是否为空如果不为空就判断是否匹配，</p>
-<p>如果不匹配就遍历链表或红黑树找匹配的节点</p>
-<p>容量:</p>
-<p>为什么容量是2的幂次方?</p>
-<p>数组长度-1 正好相当于一个“低位掩码”——掩码的低位最好全是 1，这样 &amp; 运算结果会在0到数组长度-1的范围内。</p>
-<p>初始化时候传一个17的容量他会怎么处理?</p>
-<p>HashMap 会将容量调整到大于等于 17 的最小的 2 的幂次方，也就是 32。</p>
-<p>除非是比较大为了防止多次扩容影响效率，一般不回初始化时候传入容量</p>
-<h4 id="HashMap的扩容"><a href="#HashMap的扩容" class="headerlink" title="HashMap的扩容:"></a>HashMap的扩容:</h4><p>扩容发生在什么时候:</p>
-<p>当键值对数量超过阈值，也就是容量 * 负载因子时。</p>
-<p><a href="https://javabetter.cn/sidebar/sanfene/collection.html#%E9%BB%98%E8%AE%A4%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E6%98%AF%E5%A4%9A%E5%B0%91">默认的负载因子是多少？</a></p>
-<p>0.75。这是个经验值</p>
-<p><a href="https://javabetter.cn/sidebar/sanfene/collection.html#%E5%88%9D%E5%A7%8B%E5%AE%B9%E9%87%8F%E6%98%AF%E5%A4%9A%E5%B0%91">初始容量是多少？</a></p>
-<p>16。</p>
-<p>扩容机制:</p>
-<p>扩容时，HashMap 会创建一个新的数组，其容量是原来的两倍。然后遍历旧哈希表中的元素，将其重新分配到新的哈希表中。</p>
-<p>如果当前桶中只有一个元素，那么直接通过键的哈希值与数组大小取模锁定新的索引位置：<code>e.hash &amp; (newCap - 1)</code>。</p>
-<p>如果当前桶是红黑树，那么会调用 <code>split()</code> 方法分裂树节点，以保证树的平衡。</p>
-<p>如果当前桶是链表，会通过旧键的哈希值与旧的数组大小取模 <code>(e.hash &amp; oldCap) == 0</code> 来作为判断条件，如果条件为真，元素保留在原索引的位置；否则元素移动到原索引 + 旧数组大小的位置。</p>
-<p>为什么链表转红黑树的阈值是8?</p>
-<p>阈值为什么要选 8 呢？和统计学有关。理想情况下，使用随机哈希码，链表里的节点符合泊松分布，出现节点个数的概率是递减的，节点个数为 8 的情况，发生概率仅为0.00000006。</p>
-<p>至于红黑树转回链表的阈值为什么是 6，而不是 8？是因为如果这个阈值也设置成 8，假如发生碰撞，节点增减刚好在 8 附近，会发生链表和红黑树的不断转换，导致资源浪费。</p>
-<h4 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题:"></a>线程安全问题:</h4><p>①、多线程下扩容会死循环。JDK7 中的 HashMap 使用的是头插法来处理链表，在多线程环境下扩容会出现环形链表，造成死循环。在JDK8中用尾插法处理解决了这个问题</p>
-<p>②、多线程在进行 put 元素的时候，可能会导致元素丢失。因为计算出来的位置可能会被其他线程覆盖掉，比如说一个线程 put 3 的时候，另外一个线程 put 了 7，就把 3 给弄丢了。</p>
-<p>③、put 和 get 并发时，可能导致 get 为 null。线程 1 执行 put 时，因为元素个数超出阈值而扩容，线程 2 此时执行 get，就有可能出现这个问题。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>mysql</title>
-    <url>/2025/08/31/mysql/</url>
-    <content><![CDATA[<h3 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础:"></a>SQL基础:</h3><p>联表查询:</p>
-<p>用join比where效率高</p>
-<p>group by:</p>
-<p>通常和聚合函数一起使用</p>
-<p>in和exact:</p>
-<p>in:左边的表达式在右边的列表中就返回true</p>
-<p>exact:子查询语句能查到数据就返回true</p>
-<p>varchar和char:</p>
-<p>char是定长的，效率高</p>
-<p>varchar是变长的，节省空间</p>
-<p>int(1)和int(10)有什么不同:</p>
-<p>只是会在小于位数的时候有补零显示</p>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引:"></a>索引:</h3><p>索引是为了提高搜索的效率，通过普通索引搜索会进行回表（这是最优的查询方式）。</p>
-<p>要想提高效率只能提高回表效率，提高回表效率的方式有索引覆盖和索引下推。</p>
-<p>索引覆盖:普通索引的B+树中信息涵盖了要查询的信息,直接不用回表了</p>
-<p>索引下推:把 <code>WHERE</code> 里没用到索引的条件<strong>推到引擎层</strong>提前过滤，减少回表，变快。(没有索引下推的时候一般只会在引擎层查询一个字段)</p>
-<p>什么时候索引会失效(因为写的条件使用索引的效率不高，优化器自动跳过索引进行全表扫描):</p>
-<p>违反最左匹配原则:没有按照联合索引的顺序搜索</p>
-<p>反向匹配:用!&#x3D;</p>
-<p>对索引列进行操作:函数操作，数值计算，类型转换</p>
-<p>or查询:如果有列不在索引中</p>
-<p>创建索引的原则:</p>
-<p>发挥索引覆盖和索引下推的优势</p>
-<p>不为离散度低的列创建索引</p>
-<p>只为进行搜索，排序，分组的列创建索引</p>
-<p>用好联合索引(1:不要为联合索引的第一个索引列单独创建索引(浪费空间，并且还浪费时间去维护)，2:建立联合索引的时候，一定要把最常用的列放在最左边)</p>
-<p>对长字段创建前缀索引</p>
-<p>频繁更新的列不要作为主键或者索引</p>
-<p>是什么:</p>
-<p>类似目录结构，提高搜索效率的。</p>
-<p>怎么实现的:</p>
-<p>以页为单位进行数据交换</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754211168595-157f3118-940d-4c24-950a-34ac367e7e9e.png" alt="img"></p>
-<p>到叶子节点怎么查询:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754212256209-1ca90fac-075e-4716-8ffb-cb7e75e05ac3.png" alt="img"></p>
-<p>聚族索引和非聚族索引的区别:</p>
-<p>聚族索引通常由主键构造的，只有聚族索引的叶子节点包含完整信息，通过非聚族索引查找信息需要进行“回表”</p>
-<h3 id="锁"><a href="#锁" class="headerlink" title="锁:"></a>锁:</h3><p>有哪些行级锁:</p>
-<p>• 记录锁（record lock）——锁具体一行<br>• 间隙锁（gap lock）——锁两个索引键之间的“空隙”<br>• Next-key lock——上面两者合体（左闭右开区间)</p>
-<p>插入意向锁</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>事务的特性和实现:</p>
-<p>特性:</p>
-<p>原子性，持久性，隔离性，一致性</p>
-<p>实现:</p>
-<p>持久性通过redolog来实现</p>
-<p>原子性通过undolog来实现</p>
-<p>隔离性通过MVCC或锁机制来实现</p>
-<p>一致性是通过持久性，原子性，隔离性来实现</p>
-<p>mysql可能出现什么并发问题:</p>
-<p>脏读:</p>
-<p>读到了未提交事务修改的数据</p>
-<p>不可重复度:</p>
-<p>在事务期间有其他事务提交读到了其修改的数据</p>
-<p>幻读:</p>
-<p>在事务期间查询符合某个条件的数据数量不同</p>
-<p>mysql如何解决并发问题的:</p>
-<p>锁机制和事务隔离级别</p>
-<p>事务的隔离级别有哪些:<br><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754233504568-811a75fe-6e8e-4c7e-8265-965478663843.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754233514586-aed24f4d-a3b2-425c-b56d-7cc72aa8c600.png" alt="img"></p>
-<p>可重复读隔离级别:</p>
-<p>如何实现的:</p>
-<p>在执行第一个查询语句时候创建Readview</p>
-<p>如何在可重复读隔离级别下避免幻读问题:</p>
-<p>通过当前读语句SELECT … FOR UPDATE给数据加上next-key lock</p>
-<p>介绍MVCC实现原理:</p>
-<p>每个事务都有一个ReadView,根据这个ReadView去找对应数据的undolog版本链符合的信息.</p>
-<p>undolog链:</p>
-<p>第一条在数据页中，下面的在undolog日志中</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756646416768-bc2270bb-c0ff-4eac-a451-b21d2a584706.png" alt="img"></p>
-<p>Readview快照:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756646505384-733cb94e-78ec-4a7d-bdfa-fab89c4926c5.png" alt="img"></p>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>日志分成哪几类:</p>
-<p>undolog:回滚日志，实现了事务的原子性，用于MVCC和事务回滚</p>
-<p>redolog:重做日志，实现了事务的持久性，用于掉电等故障的恢复</p>
-<p>binlog:二进制日志，是Server层生成的日志，用于数据备份和主从复制</p>
-<p>undolog:</p>
-<p>讲一下undolog:</p>
-<p>事务未提交时，将更新前的数据存到undolog日志文件中。</p>
-<p>binlog:</p>
-<p>讲一下binlog:</p>
-<p>完成一个修改数据的操作，Server会生成一条binlog，事务提交的时候就会写入binlog文件。</p>
-<p>能不能只用binlog不用redolog:</p>
-<p>binlog是server层日志，没办法记录哪些脏页还没有刷盘</p>
-<p>redolog(redolog刷盘成功标志事务提交成功):</p>
-<p>1:为什么要有redolog</p>
-<p>实现事务的持久性，保证数据库在任何时刻发生崩溃,重启之后已经提交的记录不会消失</p>
-<p>将写操作从随机写变成了顺序写(数据不先写回磁盘，后台定期将脏页刷回磁盘)</p>
-<p>2:redolog是存在内存中吗</p>
-<p>在事务执行过程中会在内存中，事务提交之后就会写到磁盘中</p>
-<p>3:怎么保持持久性</p>
-<p>数据写入磁盘之前发生宕机，系统可通过redolog来恢复数据</p>
-<p>两段提交:</p>
-<p>prepare 阶段:将 redo log 对应的事务状态设置为 prepare，然后将 redo log 刷新到硬盘;</p>
-<p>commit 阶段:将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为commit(将事务设置为 commit 状态后，刷入到磁盘 redo log 文件);</p>
-<p>谈谈mysql的双写:</p>
-<p>解决了什么问题:</p>
-<p>• 如果刷脏过程中机器掉电，就可能出现<strong>页写了一部分</strong>（partial write）：页头、校验和、数据内容不一致。<br>• 仅靠 redo log <strong>无法修复这种物理损坏</strong>（redo 只能重做逻辑操作，不能重建半个坏页）。</p>
-<p>触发时机:</p>
-<p>只在“刷脏”时用到</p>
-<p>怎么实现的:</p>
-<p><img src="https://cdn.xiaolincoding.com//picgo/1737301211946-81988282-fb5d-44f9-b8d8-94f7396db723.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>redis</title>
-    <url>/2025/08/31/redis/</url>
-    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
-<p>String:适用分布式锁，共享信息等</p>
-<p>Hash:适用购物车场景</p>
-<p>List:适用消息队列</p>
-<p>Set:适用点赞场景</p>
-<p>Zset:适用与排序场景</p>
-<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
-<p>1:redis大部分操作都是在内存中进行的</p>
-<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
-<p>3:采用了io多路复用机制处理大量的客户端请求</p>
-<p>redis哪里使用了多线程:</p>
-<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
-<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
-<p>lua脚本</p>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
-<p>AOF日志+RDB快照</p>
-<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
-<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
-<p>过期删除:</p>
-<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
-<p>内存淘汰:</p>
-<p>不进行:不再进行服务</p>
-<p>进行:优先淘汰快过期的和最近最少访问的</p>
-<p>缓存雪崩，击穿，穿透:</p>
-<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
-<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
-<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
-<p>缓存一致性:</p>
-<p>写策略:</p>
-<p>1:更新数据库的数据</p>
-<p>2:删掉缓存</p>
-<p>读策略:</p>
-<p>1:缓存未命中</p>
-<p>2:从数据库中读数据</p>
-<p>3:把数据写到缓存里</p>
-]]></content>
-      <categories>
-        <category>redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JVM</title>
-    <url>/2025/09/02/JVM/</url>
-    <content><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言:"></a>引言:</h3><h4 id="什么是jvm"><a href="#什么是jvm" class="headerlink" title="什么是jvm"></a>什么是jvm</h4><p>程序运行时，JVM 会对字节码文件进行逐行解释，翻译成机器码指令，并交给对应的操作系统去执行。</p>
-<h4 id="jvm的特性"><a href="#jvm的特性" class="headerlink" title="jvm的特性"></a>jvm的特性</h4><p>①、JVM 可以自动管理内存，通过垃圾回收器回收不再使用的对象并释放内存空间。</p>
-<p>②、JVM 包含一个即时编译器 JIT，它可以在运行时将热点代码缓存到 codeCache 中，下次执行的时候不用再一行一行的解释，而是直接执行缓存后的机器码，执行效率会大幅提高。</p>
-<h4 id="jvm的架构"><a href="#jvm的架构" class="headerlink" title="jvm的架构"></a>jvm的架构</h4><p>① 类加载器:负责从文件系统、网络或其他来源加载 Class 文件，将 Class 文件中的二进制数据读入到内存当中。</p>
-<p>② 运行时数据区:JVM 在执行 Java 程序时，需要在内存中分配空间来处理各种数据，这些内存区域按照 Java 虚拟机规范可以划分为方法区、堆、虚拟机栈、程序计数器和本地方法栈。</p>
-<p>③ 执行引擎:也是 JVM 的心脏，负责执行字节码。它包括一个虚拟处理器、即时编译器 JIT 和垃圾回收器。</p>
-<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><h4 id="java字节码文件"><a href="#java字节码文件" class="headerlink" title="java字节码文件:"></a>java字节码文件:</h4><p><img src="C:\Users\zsq\AppData\Roaming\Typora\typora-user-images\image-20250904171746785.png" alt="image-20250904171746785"></p>
-<h4 id="jvm运行时数据区"><a href="#jvm运行时数据区" class="headerlink" title="jvm运行时数据区:"></a>jvm运行时数据区:</h4><p><img src="C:\Users\zsq\AppData\Roaming\Typora\typora-user-images\image-20250904085801572.png" alt="image-20250904085801572"></p>
-<p>有什么?</p>
-<p>程序计数器:每个线程私有，记录当前程序执行的位置</p>
-<p>Java虚拟机栈:主要存储的是局部变量和对象的引用；每个方法会产生一个栈帧，每个栈帧包括局部变量区（在编译的时候就确定），操作数栈和方法返回地址，动态链接（可能存在多态的方法在编译时由于符号引用相同无法通过静态链接来转换成地址引用，所以需要在运行的时候通过查找表来确定实际的方法来进行需要动态链接）</p>
-<p>本地方法栈:本地方法用到的栈</p>
-<p>Java堆:主要存储的是对象的实例</p>
-<p>方法区:存储类的结构信息括类的定义、方法的定义、字段的定义以及字节码指令，运行时常量池（就是把.class文件中的常量池进行链接后的状态）</p>
-<p>方法区中的方法的执行过程:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753356376021-f4dc191b-0fe3-4e91-b086-b0ba0e452468.png" alt="img"></p>
-<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题:"></a>常见问题:</h4><p>引用类型有哪些?有什么区别,弱引用了解吗?</p>
-<p>强引用:永远不会被GC</p>
-<p>软引用:当内存溢出之后被回收</p>
-<p>弱引用:每次GC都会被回收</p>
-<p>虚引用:每次GC都会被回收</p>
-<p>内存泄漏和内存溢出:</p>
-<p>内存泄露:程序运行过程中不再使用的对象仍然被引用，而无法被垃圾回收器回收(ThreadLocal的内存泄漏问题)</p>
-<p>内存溢出:申请内存时候,无法找到足够的内存</p>
-<h3 id="类加载"><a href="#类加载" class="headerlink" title="类加载:"></a>类加载:</h3><h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>有哪些?</p>
-<p>启动类加载器</p>
-<p>扩展类加载器</p>
-<p>应用程序加载器</p>
-<p>用户自定义类加载器</p>
-<p>关系链:</p>
-<p>这条链在构造器里就写死了，不会因为后续你改写了加载策略而变化。</p>
-<p>扩展作用:</p>
-<p>类加载还可实现class文件加密，之后再到自定义类加载器中解密</p>
-<h4 id="双亲委派模型-它的作用"><a href="#双亲委派模型-它的作用" class="headerlink" title="双亲委派模型,它的作用:"></a>双亲委派模型,它的作用:</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753361175744-0ae928a9-bff9-43e0-87e2-8ddfcdde75aa.png" alt="img"></p>
-<p>每层加载器判断自己能否加载这个请求的依据是这个class文件在目录中的位置</p>
-<p>加载之后会留下缓存,下次发现这个类加载过就直接用了</p>
-<p>作用:<br>1:通过委派机制避免了不同类加载器加载相同类的情况，防止<strong>同一个类出现多份定义</strong><br>2:防止了核心类被假冒,核心类通过双亲委派机制被启动类加载器加载，启动类加载器访问的目录普通用户是无权将文件添加进来的</p>
-<p>打破双亲委派:自己实现加载不了再找父亲，不是直接断开了</p>
-<p>经典案例:</p>
-<p>tomcat这样的热部署框架:因为一个tomcat上可以有多个服务，不同服务可能有重名，每个服务要有自己的自定义类加载器。</p>
-<h4 id="讲下java类生命周期"><a href="#讲下java类生命周期" class="headerlink" title="讲下java类生命周期:"></a>讲下java类生命周期:</h4><p>类加载包括:加载，链接，初始化</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/webp/46195092/1753362746723-5dfe9055-0524-47bd-8222-733bb109d01a.webp" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753362762189-c5947b94-2acb-489c-837d-671cd753909d.png" alt="img"></p>
-<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><h4 id="垃圾回收-1"><a href="#垃圾回收-1" class="headerlink" title="垃圾回收:"></a>垃圾回收:</h4><p>什么是垃圾回收?</p>
-<p>自动管理内存的一种机制，负责自动释放不再被程序引用的对象所占的内存。</p>
-<p>如何触发垃圾回收?</p>
-<p>内存不足或手动请求</p>
-<p>判断垃圾的方法有哪些?</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754140808720-055f4949-9ade-4a45-b8f1-821f5a55b1b3.png" alt="img"></p>
-<p>gc只会对堆进行gc吗?</p>
-<p>也会对方法区进行回收</p>
-<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法:"></a>垃圾回收算法:</h4><p>垃圾回收算法有哪些?</p>
-<p>标记-清除:标记之后直接清理，容易产生内存碎片</p>
-<p>标记-整理:标记清理整理一下，代价太大了</p>
-<p>复制:将内存分为2个区，把不需要删除的放到另一个区，之后把那个区全部删除，需要两倍的内存</p>
-<p>分代:老年代和新生代采用各自的垃圾回收算法并且新生代经过几轮GC后会被送到老年代</p>
-<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器:"></a>垃圾回收器:</h4><p>有哪些?</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754140968969-be42b53f-7498-44c9-a1eb-81869d9f6ce8.png" alt="img"></p>
-<p>minorgc,majorgc,fullgc的区别?</p>
-<p>重新标记是保障不误删，都可以允许漏删。初次标记是为了把时间更久的标记交给并发标记。</p>
-<p>CMS:</p>
-<p>流程:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1755347391518-8e04c4e1-9fa4-4171-a5be-42634048994d.png" alt="img"></p>
-<p>G1:</p>
-<p>流程:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1755349163245-5db57d6c-94c4-472a-8daa-94b59901d4d5.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>java基础</title>
-    <url>/2025/09/02/java%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h2 id="java概述"><a href="#java概述" class="headerlink" title="java概述:"></a>java概述:</h2><p>什么是java?</p>
-<p>同时，Java 又是一门平台无关的编程语言，即一次编译，处处运行。</p>
-<p>Java 没有了指针的概念，实现了内存的自动管理，而 C 语言需要使用 malloc 和 free 来手动管理内存。</p>
-<p>java的语言特性:</p>
-<p>①、面向对象</p>
-<p>②、平台无关性</p>
-<p>③、支持多线程</p>
-<p>④、支持 JIT 编译,编译与解释并存</p>
-<p>jvm,jdk,jre的区别:</p>
-<p><strong>JVM</strong>：也就是 Java 虚拟机，是 Java 实现跨平台的关键所在，不同的操作系统有不同的 JVM 实现。JVM 负责将 Java 字节码转换为特定平台的机器码，并执行。</p>
-<p><strong>JRE</strong>：也就是 Java 运行时环境，包含了运行 Java 程序所必需的库，以及 JVM。</p>
-<p><strong>JDK</strong>：在JRE的基础上有了编译器，能将java源代码编译成字节码文件</p>
-<p>简单来说，JDK 包含 JRE，JRE 包含 JVM。</p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型:"></a>数据类型:</h2><p>八种基本的数据类型:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753968912620-c42b368a-1a9f-4bec-b81c-69fbde0b7f59.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753969057586-2888daf3-ec3a-4184-ae49-d6a931054251.png" alt="img"></p>
-<p>基本数据类型的转换方式,会出什么问题?</p>
-<p>低精度转高精度可以自动转换</p>
-<p>高精度转低精度需要强制转换可能会发生数据溢出或精度损失</p>
-<p>引用数据类型转换问题:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974631932-8de19930-3311-4c6e-8bfc-5341049a2f60.png" alt="img"></p>
-<p>装箱拆箱:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974728409-d0845e21-5171-47e1-9b22-7011aaf257c5.png" alt="img"></p>
-<p>弊端:<br>创建多余对象</p>
-<p>为什么用BigDemical不用double?</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974689386-f9c7abba-bd63-4fa8-a400-2b3722e2e8b0.png" alt="img"></p>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>说下Integer的缓存?</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753974852026-07a06035-4200-4ac2-bbcf-affd9c9bad40.png" alt="img"></p>
-<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象:"></a>面向对象:</h2><p>怎样理解面向对象,和面向对象的三大特性:</p>
-<p>将事务抽象成对象。</p>
-<p>三大特性:</p>
-<p>封装:把对象的属性和行为结合在一起</p>
-<p>继承:子类共享父类的数据和方法。是代码复用的重要手段<br>多态:不同的对象对同一个接口做出不同的反应</p>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态:"></a>多态:</h4><p>体现:</p>
-<p>方法重载和重写</p>
-<p>接口的实现</p>
-<p>解决的问题:</p>
-<p>提高了代码的复用性和扩展性。</p>
-<h4 id="普通类，抽象类，接口"><a href="#普通类，抽象类，接口" class="headerlink" title="普通类，抽象类，接口:"></a>普通类，抽象类，接口:</h4><p>普通类和抽象类:</p>
-<p>抽象类不能实例化不能被final修饰，可以存在没有实现的方法。</p>
-<p>接口和抽象类:<br>就是类和接口的区别</p>
-<h2 id="Object"><a href="#Object" class="headerlink" title="Object:"></a>Object:</h2><h4 id="和equal"><a href="#和equal" class="headerlink" title="&#x3D;&#x3D;和equal:"></a>&#x3D;&#x3D;和equal:</h4><p>在 Java 中，<code>==</code> 操作符和 <code>equals()</code> 方法用于比较两个对象：</p>
-<p>①、&#x3D;&#x3D;：用于比较两个对象的引用，即它们是否指向同一个对象实例。</p>
-<p>如果两个变量引用同一个对象实例，<code>==</code> 返回 <code>true</code>，否则返回 <code>false</code>。</p>
-<p>对于基本数据类型（如 <code>int</code>, <code>double</code>, <code>char</code> 等），<code>==</code> 比较的是值是否相等。</p>
-<p>②、<strong>equals() 方法</strong>：用于比较两个对象的内容是否相等。</p>
-<p>默认情况下，<code>equals()</code> 方法的行为与 <code>==</code> 相同，即比较对象引用。</p>
-<p>然而<code>equals()</code> 方法通常被各种类重写。例如，<code>String</code> 类重写了 <code>equals()</code> 方法，以便它可以比较两个字符串的字符内容是否完全一样。</p>
-<h4 id="equal和hashcode"><a href="#equal和hashcode" class="headerlink" title="equal和hashcode:"></a>equal和hashcode:</h4><p>因为基于哈希的集合类（如 HashMap）需要基于这一点来正确存储和查找对象。</p>
-<p><a href="https://javabetter.cn/sidebar/sanfene/javase.html#%E4%BB%80%E4%B9%88%E6%98%AF-hashcode-%E6%96%B9%E6%B3%95">什么是 hashCode 方法？</a></p>
-<p><code>hashCode()</code> 方法的作⽤是获取哈希码，它会返回⼀个 int 整数，定义在 <a href="https://javabetter.cn/oo/object-class.html">Object 类</a>中， 是一个本地⽅法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public native int hashCode();</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://javabetter.cn/sidebar/sanfene/javase.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-hashcode-%E6%96%B9%E6%B3%95">为什么要有 hashCode 方法？</a></p>
-<p>目的就是获取一个对象的key</p>
-<p>为什么hashCode相同但是它们也不一定相等?</p>
-<p>可能存在hash冲突</p>
-<p><a href="https://javabetter.cn/sidebar/sanfene/javase.html#hashcode-%E5%92%8C-equals-%E6%96%B9%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB">hashCode 和 equals 方法的关系？</a></p>
-<p>如果两个对象通过 equals 相等，它们的 hashCode 必须相等。否则会导致哈希表类数据结构的行为异常。</p>
-<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字:"></a>关键字:</h2><h4 id="final的作用"><a href="#final的作用" class="headerlink" title="final的作用:"></a>final的作用:</h4><p>修饰类时类不能被继承</p>
-<p>修饰方法时方法不能被重写</p>
-<p>修饰变量时赋值后就不能被改变</p>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型:"></a>泛型:</h2><p>为什么需要泛型:</p>
-<p>多种数据类型需要执行相同代码，使用泛型不需要强制类型转换。</p>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理:"></a>异常处理:</h2><p>异常的处理方式:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1752414491689-a86d28c3-751d-4c3b-bca7-30239bb71c2d.png" alt="img"></p>
-<h2 id="注解"><a href="#注解" class="headerlink" title="注解:"></a>注解:</h2><p>注解可以标记在类上、方法上、属性上等，标记自身也可以设置一些值</p>
-<p>2个属性:</p>
-<p>注解可以标记在类上、方法上、属性上等</p>
-<p>注解生命周期有三大类，分别是：</p>
-<ul>
-<li>RetentionPolicy.SOURCE：给编译器用的，不会写入 class 文件</li>
-<li>RetentionPolicy.CLASS：会写入 class 文件，在类加载阶段丢弃，也就是运行的时候就没这个信息了</li>
-<li>RetentionPolicy.RUNTIME：会写入 class 文件，永久保存，可以通过反射获取注解信息</li>
-</ul>
-<h2 id="反射和代理"><a href="#反射和代理" class="headerlink" title="反射和代理:"></a>反射和代理:</h2><p>硬编码和软编码</p>
-<p>反射:</p>
-<p>java实现软编码的一种方式，可以通过改变字符串的值来创建不同的对象，让代码来控制代码。</p>
-<p>应用场景:</p>
-<p>通过类名来获取对应对象</p>
-<p>两个对象进行转换</p>
-<p>代理:</p>
-<p><strong>代理模式的核心就是“包装”原对象，因此必须有两个对象：一个是原对象，一个是代理对象。</strong><br>代理对象内部持有原对象的引用，通过转发、增强、控制访问等方式实现功能扩展。</p>
-<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化:"></a>序列化:</h2><p>什么是序列化?什么是反序列化?</p>
-<p>序列化（Serialization）是指将对象转换为字节流的过程，以便能够将该对象保存到文件、数据库，或者进行网络传输。</p>
-<p>反序列化（Deserialization）就是将字节流转换回对象的过程，以便构建原始对象。</p>
-<p>常见的序列化方式:</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753796921040-c05d4fae-f52c-403b-b51e-176fa7dc04e8.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>网络io</title>
-    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>计算机基础</category>
-      </categories>
-      <tags>
-        <tag>io</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>spring</title>
     <url>/2025/09/01/spring/</url>
     <content><![CDATA[<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想:"></a>核心思想:</h3><p>spring的核心:</p>
@@ -620,6 +375,128 @@
       </tags>
   </entry>
   <entry>
+    <title>JVM</title>
+    <url>/2025/09/02/JVM/</url>
+    <content><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言:"></a>引言:</h3><h4 id="什么是jvm"><a href="#什么是jvm" class="headerlink" title="什么是jvm"></a>什么是jvm</h4><p>程序运行时，JVM 会对字节码文件进行逐行解释，翻译成机器码指令，并交给对应的操作系统去执行。</p>
+<h4 id="jvm的特性"><a href="#jvm的特性" class="headerlink" title="jvm的特性"></a>jvm的特性</h4><p>①、JVM 可以自动管理内存，通过垃圾回收器回收不再使用的对象并释放内存空间。</p>
+<p>②、JVM 包含一个即时编译器 JIT，它可以在运行时将热点代码缓存到 codeCache 中，下次执行的时候不用再一行一行的解释，而是直接执行缓存后的机器码，执行效率会大幅提高。</p>
+<h4 id="jvm的架构"><a href="#jvm的架构" class="headerlink" title="jvm的架构"></a>jvm的架构</h4><p>① 类加载器:负责从文件系统、网络或其他来源加载 Class 文件，将 Class 文件中的二进制数据读入到内存当中。</p>
+<p>② 运行时数据区:JVM 在执行 Java 程序时，需要在内存中分配空间来处理各种数据，这些内存区域按照 Java 虚拟机规范可以划分为方法区、堆、虚拟机栈、程序计数器和本地方法栈。</p>
+<p>③ 执行引擎:也是 JVM 的心脏，负责执行字节码。它包括一个虚拟处理器、即时编译器 JIT 和垃圾回收器。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><h4 id="java字节码文件"><a href="#java字节码文件" class="headerlink" title="java字节码文件:"></a>java字节码文件:</h4><p><img src="C:\Users\zsq\AppData\Roaming\Typora\typora-user-images\image-20250904171746785.png" alt="image-20250904171746785"></p>
+<h4 id="jvm运行时数据区"><a href="#jvm运行时数据区" class="headerlink" title="jvm运行时数据区:"></a>jvm运行时数据区:</h4><p><img src="C:\Users\zsq\AppData\Roaming\Typora\typora-user-images\image-20250904085801572.png" alt="image-20250904085801572"></p>
+<p>有什么?</p>
+<p>程序计数器:每个线程私有，记录当前程序执行的位置</p>
+<p>Java虚拟机栈:主要存储的是局部变量和对象的引用；每个方法会产生一个栈帧，每个栈帧包括局部变量区（在编译的时候就确定），操作数栈和方法返回地址，动态链接（可能存在多态的方法在编译时由于符号引用相同无法通过静态链接来转换成地址引用，所以需要在运行的时候通过查找表来确定实际的方法来进行需要动态链接）</p>
+<p>本地方法栈:本地方法用到的栈</p>
+<p>Java堆:主要存储的是对象的实例</p>
+<p>方法区:存储类的结构信息括类的定义、方法的定义、字段的定义以及字节码指令，运行时常量池（就是把.class文件中的常量池进行链接后的状态）</p>
+<p>方法区中的方法的执行过程:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753356376021-f4dc191b-0fe3-4e91-b086-b0ba0e452468.png" alt="img"></p>
+<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题:"></a>常见问题:</h4><p>引用类型有哪些?有什么区别,弱引用了解吗?</p>
+<p>强引用:永远不会被GC</p>
+<p>软引用:当内存溢出之后被回收</p>
+<p>弱引用:每次GC都会被回收</p>
+<p>虚引用:每次GC都会被回收</p>
+<p>内存泄漏和内存溢出:</p>
+<p>内存泄露:程序运行过程中不再使用的对象仍然被引用，而无法被垃圾回收器回收(ThreadLocal的内存泄漏问题)</p>
+<p>内存溢出:申请内存时候,无法找到足够的内存</p>
+<h3 id="类加载"><a href="#类加载" class="headerlink" title="类加载:"></a>类加载:</h3><h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>有哪些?</p>
+<p>启动类加载器</p>
+<p>扩展类加载器</p>
+<p>应用程序加载器</p>
+<p>用户自定义类加载器</p>
+<p>关系链:</p>
+<p>这条链在构造器里就写死了，不会因为后续你改写了加载策略而变化。</p>
+<p>扩展作用:</p>
+<p>类加载还可实现class文件加密，之后再到自定义类加载器中解密</p>
+<h4 id="双亲委派模型-它的作用"><a href="#双亲委派模型-它的作用" class="headerlink" title="双亲委派模型,它的作用:"></a>双亲委派模型,它的作用:</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753361175744-0ae928a9-bff9-43e0-87e2-8ddfcdde75aa.png" alt="img"></p>
+<p>每层加载器判断自己能否加载这个请求的依据是这个class文件在目录中的位置</p>
+<p>加载之后会留下缓存,下次发现这个类加载过就直接用了</p>
+<p>作用:<br>1:通过委派机制避免了不同类加载器加载相同类的情况，防止<strong>同一个类出现多份定义</strong><br>2:防止了核心类被假冒,核心类通过双亲委派机制被启动类加载器加载，启动类加载器访问的目录普通用户是无权将文件添加进来的</p>
+<p>打破双亲委派:自己实现加载不了再找父亲，不是直接断开了</p>
+<p>经典案例:</p>
+<p>tomcat这样的热部署框架:因为一个tomcat上可以有多个服务，不同服务可能有重名，每个服务要有自己的自定义类加载器。</p>
+<h4 id="讲下java类生命周期"><a href="#讲下java类生命周期" class="headerlink" title="讲下java类生命周期:"></a>讲下java类生命周期:</h4><p>类加载包括:加载，链接，初始化</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/webp/46195092/1753362746723-5dfe9055-0524-47bd-8222-733bb109d01a.webp" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1753362762189-c5947b94-2acb-489c-837d-671cd753909d.png" alt="img"></p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><h4 id="垃圾回收-1"><a href="#垃圾回收-1" class="headerlink" title="垃圾回收:"></a>垃圾回收:</h4><p>什么是垃圾回收?</p>
+<p>自动管理内存的一种机制，负责自动释放不再被程序引用的对象所占的内存。</p>
+<p>如何触发垃圾回收?</p>
+<p>内存不足或手动请求</p>
+<p>判断垃圾的方法有哪些?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754140808720-055f4949-9ade-4a45-b8f1-821f5a55b1b3.png" alt="img"></p>
+<p>gc只会对堆进行gc吗?</p>
+<p>也会对方法区进行回收</p>
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法:"></a>垃圾回收算法:</h4><p>垃圾回收算法有哪些?</p>
+<p>标记-清除:标记之后直接清理，容易产生内存碎片</p>
+<p>标记-整理:标记清理整理一下，代价太大了</p>
+<p>复制:将内存分为2个区，把不需要删除的放到另一个区，之后把那个区全部删除，需要两倍的内存</p>
+<p>分代:老年代和新生代采用各自的垃圾回收算法并且新生代经过几轮GC后会被送到老年代</p>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器:"></a>垃圾回收器:</h4><p>有哪些?</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754140968969-be42b53f-7498-44c9-a1eb-81869d9f6ce8.png" alt="img"></p>
+<p>minorgc,majorgc,fullgc的区别?</p>
+<p>重新标记是保障不误删，都可以允许漏删。初次标记是为了把时间更久的标记交给并发标记。</p>
+<p>CMS:</p>
+<p>流程:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1755347391518-8e04c4e1-9fa4-4171-a5be-42634048994d.png" alt="img"></p>
+<p>G1:</p>
+<p>流程:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1755349163245-5db57d6c-94c4-472a-8daa-94b59901d4d5.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>redis</title>
+    <url>/2025/08/31/redis/</url>
+    <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>底层的数据结构:</p>
+<p>String:适用分布式锁，共享信息等</p>
+<p>Hash:适用购物车场景</p>
+<p>List:适用消息队列</p>
+<p>Set:适用点赞场景</p>
+<p>Zset:适用与排序场景</p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型:"></a>线程模型:</h3><p>redis为什么快:</p>
+<p>1:redis大部分操作都是在内存中进行的</p>
+<p>2:redis采用了单线程模型避免了多线程的竞争，省去了多线程切换带来时间和性能上的开销</p>
+<p>3:采用了io多路复用机制处理大量的客户端请求</p>
+<p>redis哪里使用了多线程:</p>
+<p>redis会启动后台线程进行【关闭文件，AOF刷盘，释放内存】</p>
+<p>6.0以后多线程来处理网络I&#x2F;O但是执行命令仍然是单线程</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>如何实现redis的原子性:</p>
+<p>lua脚本</p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>redis的持久化方法:</p>
+<p>AOF日志+RDB快照</p>
+<p>AOF日志:每次写操作都追加到日志中,缺点:消耗大</p>
+<p>RDB快照:把某一时刻内存中的数据写到磁盘中,缺点:两次快照之间的数据读写会丢失</p>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景:"></a>场景:</h3><p>内存淘汰和过期删除:</p>
+<p>过期删除:</p>
+<p>redis选择【定期删除和惰性删除】，定期删除:每个一段时间检查一下删除过期数据，惰性删除:当请求访问数据时先判断是否过期，如果过期就删除并返回Null</p>
+<p>内存淘汰:</p>
+<p>不进行:不再进行服务</p>
+<p>进行:优先淘汰快过期的和最近最少访问的</p>
+<p>缓存雪崩，击穿，穿透:</p>
+<p>穿透:访问不存在的key在redis和mysql里都没有,等同于没有经过redis直接发到mysql  解决方案:针对查询的数据，可以在缓存中设置一个默认值</p>
+<p>击穿:某个key突然失效，大量请求发送到mysql上  解决方案:不给热点数据设置过期时间</p>
+<p>雪崩:多个key同时失效，大量请求发送到mysql上  解决方案:均匀设置过期时间避免大量数据同时过期</p>
+<p>缓存一致性:</p>
+<p>写策略:</p>
+<p>1:更新数据库的数据</p>
+<p>2:删掉缓存</p>
+<p>读策略:</p>
+<p>1:缓存未命中</p>
+<p>2:从数据库中读数据</p>
+<p>3:把数据写到缓存里</p>
+]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构</title>
     <url>/2025/09/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构:"></a>数据结构:</h3><p>提高搜索效率(索引)通常采用的数据结构:</p>
@@ -639,6 +516,17 @@
 ]]></content>
   </entry>
   <entry>
+    <title>网络io</title>
+    <url>/2025/09/01/%E7%BD%91%E7%BB%9Cio/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+      <tags>
+        <tag>io</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>建站过程</title>
     <url>/2025/08/30/%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎</a></p>
@@ -650,6 +538,118 @@
       </categories>
       <tags>
         <tag>建站</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql</title>
+    <url>/2025/08/31/mysql/</url>
+    <content><![CDATA[<h3 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础:"></a>SQL基础:</h3><p>联表查询:</p>
+<p>用join比where效率高</p>
+<p>group by:</p>
+<p>通常和聚合函数一起使用</p>
+<p>in和exact:</p>
+<p>in:左边的表达式在右边的列表中就返回true</p>
+<p>exact:子查询语句能查到数据就返回true</p>
+<p>varchar和char:</p>
+<p>char是定长的，效率高</p>
+<p>varchar是变长的，节省空间</p>
+<p>int(1)和int(10)有什么不同:</p>
+<p>只是会在小于位数的时候有补零显示</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引:"></a>索引:</h3><p>索引是为了提高搜索的效率，通过普通索引搜索会进行回表（这是最优的查询方式）。</p>
+<p>要想提高效率只能提高回表效率，提高回表效率的方式有索引覆盖和索引下推。</p>
+<p>索引覆盖:普通索引的B+树中信息涵盖了要查询的信息,直接不用回表了</p>
+<p>索引下推:把 <code>WHERE</code> 里没用到索引的条件<strong>推到引擎层</strong>提前过滤，减少回表，变快。(没有索引下推的时候一般只会在引擎层查询一个字段)</p>
+<p>什么时候索引会失效(因为写的条件使用索引的效率不高，优化器自动跳过索引进行全表扫描):</p>
+<p>违反最左匹配原则:没有按照联合索引的顺序搜索</p>
+<p>反向匹配:用!&#x3D;</p>
+<p>对索引列进行操作:函数操作，数值计算，类型转换</p>
+<p>or查询:如果有列不在索引中</p>
+<p>创建索引的原则:</p>
+<p>发挥索引覆盖和索引下推的优势</p>
+<p>不为离散度低的列创建索引</p>
+<p>只为进行搜索，排序，分组的列创建索引</p>
+<p>用好联合索引(1:不要为联合索引的第一个索引列单独创建索引(浪费空间，并且还浪费时间去维护)，2:建立联合索引的时候，一定要把最常用的列放在最左边)</p>
+<p>对长字段创建前缀索引</p>
+<p>频繁更新的列不要作为主键或者索引</p>
+<p>是什么:</p>
+<p>类似目录结构，提高搜索效率的。</p>
+<p>怎么实现的:</p>
+<p>以页为单位进行数据交换</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754211168595-157f3118-940d-4c24-950a-34ac367e7e9e.png" alt="img"></p>
+<p>到叶子节点怎么查询:</p>
+<p>数据也按照主键顺序组成单项链表，通过遍历可以找到节点，并且数据页中还有页目录来提高查找效率</p>
+<p>聚族索引和非聚族索引的区别:</p>
+<p>聚族索引通常由主键构造的，只有聚族索引的叶子节点包含完整信息，通过非聚族索引查找信息需要进行“回表”</p>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁:"></a>锁:</h3><p>有哪些行级锁:</p>
+<p>• 记录锁（record lock）——锁具体一行<br>• 间隙锁（gap lock）——锁两个索引键之间的“空隙”<br>• Next-key lock——上面两者合体（左闭右开区间)</p>
+<p>插入意向锁:如果没有插入意向锁，插入请求在往间隙中插入信息的操作就变成了串行</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务:"></a>事务:</h3><p>事务的特性和实现:</p>
+<p>特性:</p>
+<p>原子性，持久性，隔离性，一致性</p>
+<p>实现:</p>
+<p>持久性通过redolog来实现</p>
+<p>原子性通过undolog来实现</p>
+<p>隔离性通过MVCC或锁机制来实现</p>
+<p>一致性是通过持久性，原子性，隔离性来实现</p>
+<p>mysql可能出现什么并发问题:</p>
+<p>脏读:</p>
+<p>读到了未提交事务修改的数据</p>
+<p>不可重复度:</p>
+<p>在事务期间有其他事务提交读到了其修改的数据</p>
+<p>幻读:</p>
+<p>在事务期间查询符合某个条件的数据数量不同</p>
+<p>mysql如何解决并发问题的:</p>
+<p>锁机制和事务隔离级别</p>
+<p>事务的隔离级别有哪些:<br><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754233504568-811a75fe-6e8e-4c7e-8265-965478663843.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1754233514586-aed24f4d-a3b2-425c-b56d-7cc72aa8c600.png" alt="img"></p>
+<p>可重复读隔离级别:</p>
+<p>如何实现的:</p>
+<p>在执行第一个查询语句时候创建Readview</p>
+<p>如何在可重复读隔离级别下避免幻读问题:</p>
+<p>通过当前读语句SELECT … FOR UPDATE给数据加上next-key lock</p>
+<p>介绍MVCC实现原理:</p>
+<p>每个事务都有一个ReadView,根据这个ReadView去找对应数据的undolog版本链符合的信息.</p>
+<p>undolog链:</p>
+<p>第一条在数据页中，下面的在undolog日志中</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756646416768-bc2270bb-c0ff-4eac-a451-b21d2a584706.png" alt="img"></p>
+<p>Readview快照:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/46195092/1756646505384-733cb94e-78ec-4a7d-bdfa-fab89c4926c5.png" alt="img"></p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志:"></a>日志:</h3><p>日志分成哪几类:</p>
+<p>undolog:回滚日志，实现了事务的原子性，用于MVCC和事务回滚</p>
+<p>redolog:重做日志，实现了事务的持久性，用于掉电等故障的恢复</p>
+<p>binlog:二进制日志，是Server层生成的日志，用于数据备份和主从复制</p>
+<p>undolog:</p>
+<p>讲一下undolog:</p>
+<p>事务未提交时，将更新前的数据存到undolog日志文件中。</p>
+<p>binlog:</p>
+<p>讲一下binlog:</p>
+<p>完成一个修改数据的操作，Server会生成一条binlog，事务提交的时候就会写入binlog文件。</p>
+<p>能不能只用binlog不用redolog:</p>
+<p>binlog是server层日志，没办法记录哪些脏页还没有刷盘</p>
+<p>redolog(redolog刷盘成功标志事务提交成功):</p>
+<p>1:为什么要有redolog</p>
+<p>实现事务的持久性，保证数据库在任何时刻发生崩溃,重启之后已经提交的记录不会消失</p>
+<p>将写操作从随机写变成了顺序写(数据不先写回磁盘，后台定期将脏页刷回磁盘)</p>
+<p>2:redolog是存在内存中吗</p>
+<p>在事务执行过程中会在内存中，事务提交之后就会写到磁盘中</p>
+<p>3:怎么保持持久性</p>
+<p>数据写入磁盘之前发生宕机，系统可通过redolog来恢复数据</p>
+<p>两段提交:</p>
+<p>prepare 阶段:将 redo log 对应的事务状态设置为 prepare，然后将 redo log 刷新到硬盘;</p>
+<p>commit 阶段:将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为commit(将事务设置为 commit 状态后，刷入到磁盘 redo log 文件);</p>
+<p>谈谈mysql的双写:</p>
+<p>解决了什么问题:</p>
+<p>• 如果刷脏过程中机器掉电，就可能出现<strong>页写了一部分</strong>（partial write）：页头、校验和、数据内容不一致。<br>• 仅靠 redo log <strong>无法修复这种物理损坏</strong>（redo 只能重做逻辑操作，不能重建半个坏页）。</p>
+<p>触发时机:</p>
+<p>只在“刷脏”时用到</p>
+<p>怎么实现的:</p>
+<p><img src="https://cdn.xiaolincoding.com//picgo/1737301211946-81988282-fb5d-44f9-b8d8-94f7396db723.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
       </tags>
   </entry>
 </search>
